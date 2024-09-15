@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_string_interpolations, unnecessary_brace_in_string_interps, prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, non_constant_identifier_names, must_be_immutable
 
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/data/dbRepository.dart' as dbrepository;
 import 'package:app/domain/repository/repository.dart' as repository;
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
@@ -21,7 +21,7 @@ class SummaryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<summaryProvider>(context, listen: false);
+    final provider = Provider.of<summaryProvider>(context, listen: true);
     provider.defaultValues(0, 0);
 
     return Consumer<summaryProvider>(
@@ -129,7 +129,7 @@ class SummaryTab extends StatelessWidget {
                                 },
                             },
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all(
+                              foregroundColor: WidgetStateProperty.all(
                                 selectedTotal == true
                                     ? const Color.fromARGB(255, 200, 202, 202)
                                     : _selectedIndex == i

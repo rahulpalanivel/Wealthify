@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, use_build_context_synchronously, prefer_interpolation_to_compose_strings, unnecessary_null_comparison, dead_code, body_might_complete_normally_nullable, prefer_const_constructors, sized_box_for_whitespace
 
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/data/dbRepository.dart' as dbrepository;
 import 'package:app/domain/repository/repository.dart' as repository;
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/transactionProvider.dart';
@@ -18,7 +18,7 @@ class TransactionTab extends StatelessWidget {
     bool selectedTotal = true;
     int currentYear = 0;
     List<String> months = collections.months;
-    List<String> yearList = repository.getYearList(dbrepository.getRecords());
+    //List<String> yearList = repository.getYearList(dbrepository.getRecords());
 
     return Consumer<transactionProvider>(
       builder: (context, provider, child) {
@@ -59,24 +59,29 @@ class TransactionTab extends StatelessWidget {
                                     selectedTotal = false;
                                     selectedIndex = 0;
                                     provider.updateRecords(
-                                        0, int.parse(yearList[currentYear]));
+                                        0,
+                                        int.parse(
+                                            provider.yearList[currentYear]));
                                   }
                                 },
                                 icon: const Icon(Icons.arrow_back)),
                             Text(
-                                yearList.isNotEmpty
-                                    ? yearList[currentYear]
+                                provider.yearList.isNotEmpty
+                                    ? provider.yearList[currentYear]
                                     : "null",
                                 style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
                             IconButton(
                                 onPressed: () {
-                                  if (currentYear < (yearList.length - 1)) {
+                                  if (currentYear <
+                                      (provider.yearList.length - 1)) {
                                     currentYear++;
                                     selectedTotal = false;
                                     selectedIndex = 0;
                                     provider.updateRecords(
-                                        0, int.parse(yearList[currentYear]));
+                                        0,
+                                        int.parse(
+                                            provider.yearList[currentYear]));
                                   }
                                 },
                                 icon: const Icon(Icons.arrow_forward))
@@ -98,16 +103,18 @@ class TransactionTab extends StatelessWidget {
                             for (int i = 0; i < months.length; i++)
                               TextButton(
                                 onPressed: () => {
-                                  if (yearList.isNotEmpty)
+                                  if (provider.yearList.isNotEmpty)
                                     {
                                       selectedTotal = false,
                                       selectedIndex = i,
                                       provider.updateRecords(
-                                          i, int.parse(yearList[currentYear]))
+                                          i,
+                                          int.parse(
+                                              provider.yearList[currentYear]))
                                     },
                                 },
                                 style: ButtonStyle(
-                                  foregroundColor: MaterialStateProperty.all(
+                                  foregroundColor: WidgetStateProperty.all(
                                     selectedTotal == true
                                         ? const Color.fromARGB(
                                             255, 200, 202, 202)
@@ -206,22 +213,33 @@ class TransactionTab extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return BankStatement();
+                        return BankStatement(
+                          selectedTotal: selectedTotal,
+                          selectedMonth: selectedIndex,
+                          selectedYear: provider.yearList.isNotEmpty
+                              ? provider.yearList[currentYear]
+                              : "0",
+                        );
                       },
                     );
                   },
                 ),
                 ElevatedButton(
-                  onPressed: () => showDialog(
-                      context: context,
-                      builder: (context) {
-                        return CashRecord(
-                          selectedTotal: selectedTotal,
-                          selectedYear:
-                              yearList.isNotEmpty ? yearList[currentYear] : "0",
-                          selectedMonth: selectedIndex,
-                        );
-                      }),
+                  onPressed: () => {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return CashRecord(
+                            selectedTotal: selectedTotal,
+                            selectedYear: provider.yearList.isNotEmpty
+                                ? provider.yearList[currentYear]
+                                : "0",
+                            selectedMonth: selectedIndex,
+                          );
+                        }),
+                    provider.yearList =
+                        repository.getYearList(dbrepository.getRecords())
+                  },
                   child: Text(
                     "Add Cash Record",
                   ),

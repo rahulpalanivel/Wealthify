@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +30,10 @@ class Sidebar extends StatelessWidget {
             ),
             TextButton(
               onPressed: () => {
-                dbrepository.deleteAllRecods(),
-                dbrepository.deleteAllBudgets(),
-                provider.updateRecords(),
-                tprovider.updateRecords(0, 0),
+                provider.deleteRecords(),
+                provider.deleteBudgets(),
+                provider.updateValues(0, 0),
+                tprovider.deleteRecords(),
                 Navigator.pop(context)
               },
               child: Text("Confirm"),

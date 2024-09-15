@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/data/dbRepository.dart' as dbrepository;
 import 'package:app/domain/model/Finance.dart';
 import 'package:app/domain/repository/repository.dart' as repository;
 import 'package:app/utils/collections.dart' as collections;
@@ -87,6 +87,20 @@ class summaryProvider extends ChangeNotifier {
 
   void updateBudgets() {
     budgetRecords = dbrepository.getBudgets();
+    notifyListeners();
+  }
+
+  void deleteRecords() {
+    dbrepository.deleteAllRecords();
+    List<Finance> records = [];
+    transactionRecords = records;
+    notifyListeners();
+  }
+
+  void deleteBudgets() {
+    dbrepository.deleteAllBudgets();
+    List<Budget> budget = [];
+    budgetRecords = budget;
     notifyListeners();
   }
 }

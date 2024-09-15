@@ -63,8 +63,8 @@ List<Finance> getRecords() {
   return Records;
 }
 
-Future<void> deleteAllRecods() async {
-  await financeBox.clear();
+void deleteAllRecords() {
+  financeBox.clear();
 }
 
 void newBudget(String category, String duration, double amount) {

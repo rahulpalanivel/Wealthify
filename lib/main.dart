@@ -1,6 +1,5 @@
 import 'package:app/domain/model/Budget.dart';
 import 'package:app/domain/model/Finance.dart';
-import 'package:app/utils/routes.dart';
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
 import 'package:flutter/material.dart';
@@ -67,8 +66,8 @@ class _MyAppState extends State<MyApp> {
             }
           },
         ),
-        initialRoute: '/',
-        onGenerateRoute: RouteGenerator.generateRoute,
+        // initialRoute: '/',
+        // onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
   }

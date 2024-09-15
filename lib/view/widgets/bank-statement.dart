@@ -6,7 +6,16 @@ import 'package:app/view/widgets/DropDownBox.dart';
 import 'package:flutter/material.dart';
 
 class BankStatement extends StatefulWidget {
-  const BankStatement({super.key});
+  const BankStatement({
+    super.key,
+    required this.selectedTotal,
+    required this.selectedMonth,
+    required this.selectedYear,
+  });
+
+  final bool selectedTotal;
+  final String selectedYear;
+  final int selectedMonth;
 
   @override
   State<BankStatement> createState() => _BankStatementState();
@@ -28,6 +37,9 @@ class _BankStatementState extends State<BankStatement> {
             builder: (context) => TransactionData(
                   data: Data,
                   account: SelectedItem,
+                  selectedTotal: widget.selectedTotal,
+                  selectedMonth: widget.selectedMonth,
+                  selectedYear: widget.selectedYear,
                 )),
       );
     }

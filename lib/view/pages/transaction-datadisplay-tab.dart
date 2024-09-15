@@ -1,18 +1,30 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, must_be_immutable, prefer_if_null_operators
 
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/data/dbRepository.dart' as dbrepository;
 import 'package:app/view/provider/summaryProvider.dart';
+import 'package:app/view/provider/transactionProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TransactionData extends StatelessWidget {
-  const TransactionData({super.key, required this.data, required this.account});
+  const TransactionData({
+    super.key,
+    required this.data,
+    required this.account,
+    required this.selectedTotal,
+    required this.selectedMonth,
+    required this.selectedYear,
+  });
   final List<List<dynamic>> data;
   final account;
+  final bool selectedTotal;
+  final String selectedYear;
+  final int selectedMonth;
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<summaryProvider>(context, listen: false);
+    final tprovider = Provider.of<transactionProvider>(context, listen: false);
     return Scaffold(
       body: Center(
         child: Column(
@@ -76,6 +88,13 @@ class TransactionData extends StatelessWidget {
                       dbrepository.addRecords(data, account);
                       provider.updateValues(0, 0);
                       provider.updateRecords();
+                      if (selectedTotal) {
+                        tprovider.updateRecords(0, 0);
+                      } else {
+                        tprovider.updateRecords(
+                            selectedMonth, int.parse(selectedYear));
+                      }
+
                       Navigator.pop(context);
                       Navigator.pop(context);
                     },

@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace
 
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/data/dbRepository.dart' as dbrepository;
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/widgets/DropDownBox.dart';

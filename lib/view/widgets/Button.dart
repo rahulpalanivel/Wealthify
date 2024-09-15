@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers
 
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/data/dbRepository.dart' as dbrepository;
 import 'package:app/domain/repository/repository.dart' as repository;
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
