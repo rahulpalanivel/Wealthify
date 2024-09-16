@@ -6,7 +6,6 @@ import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/widgets/Categories.dart';
 import 'package:app/view/widgets/TransactionBox.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,165 +25,160 @@ class SummaryTab extends StatelessWidget {
 
     return Consumer<summaryProvider>(
       builder: (context, providerValue, child) {
-        return SingleChildScrollView(
+        return Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 20,
-              ),
-              const Padding(padding: EdgeInsets.all(5)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TransactionBox(
-                    color: Colors.green,
-                    value: providerValue.incoming,
-                    type: 'Incoming',
-                  ),
-                  TransactionBox(
-                    color: Colors.blue,
-                    value: (providerValue.incoming + providerValue.outgoing),
-                    type: 'Balance',
-                  ),
-                  TransactionBox(
-                    color: Colors.red,
-                    value: providerValue.outgoing,
-                    type: 'Outgoing',
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    height: 35,
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
+              Card(
+                child: Column(
+                  children: [
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        TextButton(
-                            onPressed: () {
-                              selectedTotal = true;
-                              provider.updateValues(0, 0);
-                            },
-                            child: Text("Total",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: selectedTotal == true
-                                        ? Colors.black
-                                        : const Color.fromARGB(
-                                            255, 200, 202, 202)))),
-                        IconButton(
-                            onPressed: () {
-                              if (currentYear > 0) {
-                                currentYear--;
-                                selectedTotal = false;
-                                _selectedIndex = 0;
-                                provider.updateValues(
-                                    0, int.parse(yearList[currentYear]));
-                              }
-                            },
-                            icon: Icon(Icons.arrow_back)),
-                        Text(
-                            yearList.isNotEmpty
-                                ? yearList[currentYear]
-                                : "null",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold)),
-                        IconButton(
-                            onPressed: () {
-                              if (currentYear < (yearList.length - 1)) {
-                                currentYear++;
-                                selectedTotal = false;
-                                _selectedIndex = 0;
-                                provider.updateValues(
-                                    0, int.parse(yearList[currentYear]));
-                              }
-                            },
-                            icon: Icon(Icons.arrow_forward))
+                        TransactionBox(
+                          color: Colors.green,
+                          value: providerValue.incoming,
+                          type: 'Incoming',
+                        ),
+                        TransactionBox(
+                          color: Colors.blue,
+                          value:
+                              (providerValue.incoming + providerValue.outgoing),
+                          type: 'Balance',
+                        ),
+                        TransactionBox(
+                          color: Colors.red,
+                          value: providerValue.outgoing,
+                          type: 'Outgoing',
+                        ),
                       ],
                     ),
-                  )
-                ],
-              ),
-              //Second row
-              Row(
-                children: [
-                  SizedBox(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
+                    Row(
                       children: [
-                        for (int i = 0; i < months.length; i++)
-                          TextButton(
-                            onPressed: () => {
-                              if (yearList.isNotEmpty)
-                                {
-                                  selectedTotal = false,
-                                  _selectedIndex = i,
-                                  provider.updateValues(
-                                      i, int.parse(yearList[currentYear]))
-                                },
-                            },
-                            style: ButtonStyle(
-                              foregroundColor: WidgetStateProperty.all(
-                                selectedTotal == true
-                                    ? const Color.fromARGB(255, 200, 202, 202)
-                                    : _selectedIndex == i
-                                        ? const Color.fromARGB(255, 0, 0, 0)
-                                        : const Color.fromARGB(
-                                            255, 200, 202, 202),
-                              ),
-                            ),
-                            child: Text(months[i]),
+                        SizedBox(
+                          height: 35,
+                          width: 400,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    selectedTotal = true;
+                                    provider.updateValues(0, 0);
+                                  },
+                                  child: Text("Total",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: selectedTotal == true
+                                              ? Colors.black
+                                              : const Color.fromARGB(
+                                                  255, 200, 202, 202)))),
+                              IconButton(
+                                  onPressed: () {
+                                    if (currentYear > 0) {
+                                      currentYear--;
+                                      selectedTotal = false;
+                                      _selectedIndex = 0;
+                                      provider.updateValues(
+                                          0, int.parse(yearList[currentYear]));
+                                    }
+                                  },
+                                  icon: Icon(Icons.arrow_back)),
+                              Text(
+                                  yearList.isNotEmpty
+                                      ? yearList[currentYear]
+                                      : "null",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold)),
+                              IconButton(
+                                  onPressed: () {
+                                    if (currentYear < (yearList.length - 1)) {
+                                      currentYear++;
+                                      selectedTotal = false;
+                                      _selectedIndex = 0;
+                                      provider.updateValues(
+                                          0, int.parse(yearList[currentYear]));
+                                    }
+                                  },
+                                  icon: Icon(Icons.arrow_forward))
+                            ],
                           ),
+                        )
                       ],
                     ),
-                  )
-                ],
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 50,
+                          width: 400,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            children: [
+                              for (int i = 0; i < months.length; i++)
+                                TextButton(
+                                  onPressed: () => {
+                                    if (yearList.isNotEmpty)
+                                      {
+                                        selectedTotal = false,
+                                        _selectedIndex = i,
+                                        provider.updateValues(
+                                            i, int.parse(yearList[currentYear]))
+                                      },
+                                  },
+                                  style: ButtonStyle(
+                                    foregroundColor: WidgetStateProperty.all(
+                                      selectedTotal == true
+                                          ? const Color.fromARGB(
+                                              255, 200, 202, 202)
+                                          : _selectedIndex == i
+                                              ? const Color.fromARGB(
+                                                  255, 0, 0, 0)
+                                              : const Color.fromARGB(
+                                                  255, 200, 202, 202),
+                                    ),
+                                  ),
+                                  child: Text(months[i]),
+                                ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
-
-              GridView.count(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                children: [
-                  Category(
-                      category: 'Food & Drinks',
-                      value: providerValue.FoodnDrinks),
-                  Category(category: 'Shopping', value: providerValue.Shopping),
-                  Category(
-                      category: 'Groceries', value: providerValue.Groceries),
-                  Category(category: 'Medical', value: providerValue.Medical),
-                  Category(category: 'Bills', value: providerValue.Bills),
-                  Category(category: 'Travel', value: providerValue.Travel),
-                  Category(category: 'Transfer', value: providerValue.Transfer),
-                  Category(
-                      category: 'Credit Card', value: providerValue.CreditCard),
-                  Category(
-                      category: 'Education', value: providerValue.Education),
-                  Category(category: 'Home', value: providerValue.Home),
-                  Category(category: 'Salary', value: providerValue.Salary),
-                  Category(category: 'Others', value: providerValue.Others),
-                ],
+              Expanded(
+                child: GridView.count(
+                  //physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  crossAxisCount: 3,
+                  children: [
+                    Category(
+                        category: 'Food & Drinks',
+                        value: providerValue.FoodnDrinks),
+                    Category(
+                        category: 'Shopping', value: providerValue.Shopping),
+                    Category(
+                        category: 'Groceries', value: providerValue.Groceries),
+                    Category(category: 'Medical', value: providerValue.Medical),
+                    Category(category: 'Bills', value: providerValue.Bills),
+                    Category(category: 'Travel', value: providerValue.Travel),
+                    Category(
+                        category: 'Transfer', value: providerValue.Transfer),
+                    Category(
+                        category: 'Credit Card',
+                        value: providerValue.CreditCard),
+                    Category(
+                        category: 'Education', value: providerValue.Education),
+                    Category(category: 'Home', value: providerValue.Home),
+                    Category(category: 'Salary', value: providerValue.Salary),
+                    Category(category: 'Others', value: providerValue.Others),
+                  ],
+                ),
               ),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                "Analytics",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Container(
-                child: PieChart(
-                    PieChartData(sectionsSpace: 0, centerSpaceRadius: 0)),
-                height: 400,
-              )
             ],
           ),
         );

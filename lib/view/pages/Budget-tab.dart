@@ -2,7 +2,6 @@
 
 import 'package:app/domain/repository/repository.dart' as repository;
 import 'package:app/view/provider/summaryProvider.dart';
-import 'package:app/view/widgets/budget-tab-dialog-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -103,21 +102,6 @@ class BudgetTab extends StatelessWidget {
                     },
                   ),
                 ),
-                IconButton(
-                  icon: CircleAvatar(
-                    backgroundColor: Colors.lightBlue,
-                    radius: 20.0,
-                    child: Icon(Icons.add, color: Colors.white),
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return BudgetDialog();
-                      },
-                    );
-                  },
-                )
               ],
             ),
           ),

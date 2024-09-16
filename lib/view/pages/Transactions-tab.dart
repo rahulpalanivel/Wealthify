@@ -1,11 +1,8 @@
 // ignore_for_file: non_constant_identifier_names, use_build_context_synchronously, prefer_interpolation_to_compose_strings, unnecessary_null_comparison, dead_code, body_might_complete_normally_nullable, prefer_const_constructors, sized_box_for_whitespace
 
-import 'package:app/data/dbRepository.dart' as dbrepository;
 import 'package:app/domain/repository/repository.dart' as repository;
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/transactionProvider.dart';
-import 'package:app/view/widgets/Cash-Record.dart';
-import 'package:app/view/widgets/bank-statement.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -133,6 +130,7 @@ class TransactionTab extends StatelessWidget {
                   ),
                 ]),
               ),
+
               Expanded(
                   child: ListView.builder(
                 itemCount: provider.transactionRecords.length,
@@ -206,48 +204,48 @@ class TransactionTab extends StatelessWidget {
                   }
                 },
               )),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                ElevatedButton(
-                  child: Text("Add Bank Statement"),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return BankStatement(
-                          selectedTotal: selectedTotal,
-                          selectedMonth: selectedIndex,
-                          selectedYear: provider.yearList.isNotEmpty
-                              ? provider.yearList[currentYear]
-                              : "0",
-                        );
-                      },
-                    );
-                  },
-                ),
-                ElevatedButton(
-                  onPressed: () => {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return CashRecord(
-                            selectedTotal: selectedTotal,
-                            selectedYear: provider.yearList.isNotEmpty
-                                ? provider.yearList[currentYear]
-                                : "0",
-                            selectedMonth: selectedIndex,
-                          );
-                        }),
-                    provider.yearList =
-                        repository.getYearList(dbrepository.getRecords())
-                  },
-                  child: Text(
-                    "Add Cash Record",
-                  ),
-                )
-              ]),
-              SizedBox(
-                height: 10,
-              )
+              // Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              //   ElevatedButton(
+              //     child: Text("Add Bank Statement"),
+              //     onPressed: () {
+              //       showDialog(
+              //         context: context,
+              //         builder: (context) {
+              //           return BankStatement(
+              //             selectedTotal: selectedTotal,
+              //             selectedMonth: selectedIndex,
+              //             selectedYear: provider.yearList.isNotEmpty
+              //                 ? provider.yearList[currentYear]
+              //                 : "0",
+              //           );
+              //         },
+              //       );
+              //     },
+              //   ),
+              //   ElevatedButton(
+              //     onPressed: () => {
+              //       showDialog(
+              //           context: context,
+              //           builder: (context) {
+              //             return CashRecord(
+              //               selectedTotal: selectedTotal,
+              //               selectedYear: provider.yearList.isNotEmpty
+              //                   ? provider.yearList[currentYear]
+              //                   : "0",
+              //               selectedMonth: selectedIndex,
+              //             );
+              //           }),
+              //       provider.yearList =
+              //           repository.getYearList(dbrepository.getRecords())
+              //     },
+              //     child: Text(
+              //       "Add Cash Record",
+              //     ),
+              //   )
+              // ]),
+              // SizedBox(
+              //   height: 10,
+              // )
             ],
           ),
         );

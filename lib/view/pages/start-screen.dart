@@ -1,4 +1,4 @@
-import 'package:app/view/pages/home-screen.dart';
+import 'package:app/view/widgets/mainScreen.dart';
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
@@ -23,7 +23,7 @@ class StartScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const Main()),
                 ),
                 child: Container(
                   height: 70,

@@ -1,13 +1,12 @@
 import 'package:app/domain/model/Budget.dart';
 import 'package:app/domain/model/Finance.dart';
+import 'package:app/view/pages/start-screen.dart';
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:provider/provider.dart';
-
-import 'view/pages/start-screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
