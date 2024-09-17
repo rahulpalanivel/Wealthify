@@ -1,4 +1,4 @@
-import 'package:app/domain/repository/repository.dart' as repository;
+import 'package:app/domain/repository.dart' as repository;
 import 'package:app/utils/screensize.dart' as screen;
 import 'package:flutter/material.dart';
 

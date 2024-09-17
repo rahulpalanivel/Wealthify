@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, prefer_const_constructors, use_build_context_synchronously, sized_box_for_whitespace
 
-import 'package:app/domain/repository/repository.dart' as repository;
+import 'package:app/domain/repository.dart' as repository;
 import 'package:app/view/pages/transaction-datadisplay-tab.dart';
 import 'package:app/view/widgets/DropDownBox.dart';
 import 'package:flutter/material.dart';

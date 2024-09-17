@@ -1,6 +1,6 @@
-import 'package:app/domain/model/Budget.dart';
-import 'package:app/domain/model/Finance.dart';
-import 'package:app/domain/repository/repository.dart' as repository;
+import 'package:app/data/model/Budget.dart';
+import 'package:app/data/model/Finance.dart';
+import 'package:app/domain/repository.dart' as repository;
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 

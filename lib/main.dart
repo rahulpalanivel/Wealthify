@@ -1,5 +1,5 @@
-import 'package:app/domain/model/Budget.dart';
-import 'package:app/domain/model/Finance.dart';
+import 'package:app/data/model/Budget.dart';
+import 'package:app/data/model/Finance.dart';
 import 'package:app/view/pages/start-screen.dart';
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';

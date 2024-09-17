@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, unnecessary_null_comparison, prefer_const_constructors, body_might_complete_normally_nullable
 
-import 'package:app/domain/repository/repository.dart' as repository;
+import 'package:app/domain/repository.dart' as repository;
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
