@@ -8,6 +8,8 @@ class CCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void modifyBalance() {}
+
     return Consumer<summaryProvider>(builder: (context, provider, child) {
       provider.defaultValues(0, 0);
       return Container(
@@ -67,9 +69,14 @@ class CCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Icon(
-                      Icons.more_horiz,
-                      color: Colors.white,
+                    GestureDetector(
+                      child: const Icon(
+                        Icons.more_horiz,
+                        color: Colors.white,
+                      ),
+                      onTap: () {
+                        modifyBalance();
+                      },
                     ),
                   ],
                 ),
