@@ -1,4 +1,4 @@
-import 'package:app/view/widgets/mainScreen.dart';
+import 'package:app/view/pages/mainScreen.dart';
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {

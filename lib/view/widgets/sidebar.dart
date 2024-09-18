@@ -60,15 +60,25 @@ class Sidebar extends StatelessWidget {
                 BoxDecoration(color: Color.fromARGB(255, 178, 175, 175)),
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("Settings"),
-            onTap: () => {},
-          ),
-          ListTile(
             leading: Icon(Icons.cleaning_services),
             title: Text("Wipe Data"),
             onTap: () => {wipeData(context)},
-          )
+          ),
+          ListTile(
+            leading: Icon(Icons.lock),
+            title: Text("Device Authentication"),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(Icons.notification_add),
+            title: Text("Enable Notifications"),
+            onTap: () => {},
+          ),
+          ListTile(
+            leading: Icon(Icons.mode_edit),
+            title: Text("Change Theme"),
+            onTap: () => {},
+          ),
         ],
       ),
     );
