@@ -155,26 +155,34 @@ class SummaryTab extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: GridView.count(
-                  //physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 3,
-                  children: [
-                    Category(
-                        category: 'Food & Drinks', value: provider.FoodnDrinks),
-                    Category(category: 'Shopping', value: provider.Shopping),
-                    Category(category: 'Groceries', value: provider.Groceries),
-                    Category(category: 'Medical', value: provider.Medical),
-                    Category(category: 'Bills', value: provider.Bills),
-                    Category(category: 'Travel', value: provider.Travel),
-                    Category(category: 'Transfer', value: provider.Transfer),
-                    Category(
-                        category: 'Credit Card', value: provider.CreditCard),
-                    Category(category: 'Education', value: provider.Education),
-                    Category(category: 'Home', value: provider.Home),
-                    Category(category: 'Salary', value: provider.Salary),
-                    Category(category: 'Others', value: provider.Others),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: GridView.count(
+                    //physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    childAspectRatio: 2,
+                    mainAxisSpacing: 2,
+                    children: [
+                      Category(
+                          category: 'Food & Drinks',
+                          value: provider.FoodnDrinks),
+                      Category(category: 'Shopping', value: provider.Shopping),
+                      Category(
+                          category: 'Groceries', value: provider.Groceries),
+                      Category(category: 'Medical', value: provider.Medical),
+                      Category(category: 'Bills', value: provider.Bills),
+                      Category(category: 'Travel', value: provider.Travel),
+                      Category(category: 'Transfer', value: provider.Transfer),
+                      Category(
+                          category: 'Credit Card', value: provider.CreditCard),
+                      Category(
+                          category: 'Education', value: provider.Education),
+                      Category(category: 'Home', value: provider.Home),
+                      Category(category: 'Salary', value: provider.Salary),
+                      Category(category: 'Others', value: provider.Others),
+                    ],
+                  ),
                 ),
               ),
             ],

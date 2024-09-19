@@ -8,30 +8,35 @@ class Category extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(6.0),
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(repository.iconForCategory(category), size: 30),
-              Text(
-                category,
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(repository.iconForCategory(category), size: 35),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    category,
+                    style: const TextStyle(
+                        fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    repository.formatAmount(value),
+                    style: const TextStyle(fontSize: 17, color: Colors.grey),
+                  ),
+                ],
               ),
-              Text(
-                repository.formatAmount(value),
-                style: const TextStyle(fontSize: 17, color: Colors.grey),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

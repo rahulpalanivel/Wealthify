@@ -29,16 +29,17 @@ class _BudgetDialogState extends State<BudgetDialog> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(15),
           child: Text(
             "Set Budget: ",
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.blue),
           ),
         ),
         Padding(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text("Category:"),
                 DropDownBox(
@@ -50,9 +51,9 @@ class _BudgetDialogState extends State<BudgetDialog> {
               ],
             )),
         Padding(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text("Type:"),
               DropDownBox(
@@ -66,9 +67,9 @@ class _BudgetDialogState extends State<BudgetDialog> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text("Amount:"),
               Container(
@@ -90,14 +91,17 @@ class _BudgetDialogState extends State<BudgetDialog> {
             ],
           ),
         ),
-        ElevatedButton(
-          onPressed: () => {
-            dbrepository.newBudget(SelectedItem, SelectedDuration,
-                double.parse(amountcontroller.text)),
-            provider.updateBudgets(),
-            Navigator.pop(context)
-          },
-          child: Text("Confirm"),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: ElevatedButton(
+            onPressed: () => {
+              dbrepository.newBudget(SelectedItem, SelectedDuration,
+                  double.parse(amountcontroller.text)),
+              provider.updateBudgets(),
+              Navigator.pop(context)
+            },
+            child: Text("Confirm"),
+          ),
         ),
       ],
     ));

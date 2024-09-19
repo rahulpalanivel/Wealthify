@@ -69,21 +69,26 @@ class _CashRecordState extends State<CashRecord> {
     int selectedMonth = widget.selectedMonth;
 
     return Dialog(
+      backgroundColor: const Color.fromARGB(255, 243, 237, 247),
+      elevation: 2,
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,
           children: [
             const Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(15.0),
               child: Text(
                 "Add new Record",
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text("Transaction:"),
                     DropDownBox(
@@ -96,9 +101,9 @@ class _CashRecordState extends State<CashRecord> {
                   ]),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Date:"),
                   SizedBox(
@@ -125,9 +130,9 @@ class _CashRecordState extends State<CashRecord> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Description:"),
                     SizedBox(
@@ -150,9 +155,9 @@ class _CashRecordState extends State<CashRecord> {
                   ]),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Category:"),
                     DropDownBox(
@@ -165,9 +170,9 @@ class _CashRecordState extends State<CashRecord> {
                   ]),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Amount:"),
                     SizedBox(
@@ -189,26 +194,23 @@ class _CashRecordState extends State<CashRecord> {
                   ]),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: ElevatedButton(
-                  onPressed: () {
-                    addCashRecord(
-                        SelectedTranc,
-                        selectdate,
-                        descController.text,
-                        SelectedCategory,
-                        double.parse(amountController.text));
-                    Navigator.pop(context);
-                    provider.updateValues(0, 0);
-                    provider.updateRecords();
-                    if (selectedTotal) {
-                      tprovider.updateRecords(0, 0);
-                    } else {
-                      tprovider.updateRecords(
-                          selectedMonth, int.parse(selectedYear));
-                    }
-                  },
-                  child: Text("Confirm")),
+                onPressed: () {
+                  addCashRecord(SelectedTranc, selectdate, descController.text,
+                      SelectedCategory, double.parse(amountController.text));
+                  Navigator.pop(context);
+                  provider.updateValues(0, 0);
+                  provider.updateRecords();
+                  if (selectedTotal) {
+                    tprovider.updateRecords(0, 0);
+                  } else {
+                    tprovider.updateRecords(
+                        selectedMonth, int.parse(selectedYear));
+                  }
+                },
+                child: Text("Confirm"),
+              ),
             )
           ]),
     );
