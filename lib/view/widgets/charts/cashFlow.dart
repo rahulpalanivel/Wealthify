@@ -3,8 +3,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FLow extends StatelessWidget {
-  const FLow({super.key});
+class cashFlow extends StatelessWidget {
+  const cashFlow({super.key});
 
   @override
   Widget build(BuildContext context) {

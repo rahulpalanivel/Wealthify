@@ -13,11 +13,9 @@ class Pchart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<summaryProvider>(builder: (context, provider, child) {
-      //provider.defaultValues(0, 0);
-
       return Container(
         height: 360,
-        width: 360,
+        width: 380,
         decoration: BoxDecoration(
           boxShadow: const [
             BoxShadow(
@@ -36,7 +34,7 @@ class Pchart extends StatelessWidget {
             child: PieChart(
               checkVal(dataByCategory)
                   ? PieChartData(
-                      sections: dataSet(dataByCategory),
+                      sections: dataSet(),
                       sectionsSpace: 0,
                       centerSpaceRadius: 0,
                       startDegreeOffset: 90)
@@ -56,15 +54,17 @@ class Pchart extends StatelessWidget {
     });
   }
 
-  List<PieChartSectionData> dataSet(List data) {
-    return List.generate(12, (i) {
+  List<PieChartSectionData> dataSet() {
+    return List.generate(dataByCategory.length, (i) {
+      final value = dataByCategory[i] < 0
+          ? (dataByCategory[i] * -1).roundToDouble()
+          : dataByCategory[i].roundToDouble();
+
       return PieChartSectionData(
-          value: dataByCategory[i] < 0
-              ? (dataByCategory[i] * -1)
-              : dataByCategory[i],
+          value: value,
           color: collections.colorList[i],
           showTitle: false,
-          radius: 160,
+          radius: 140,
           badgeWidget: Container(
             height: 30,
             width: 30,

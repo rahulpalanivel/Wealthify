@@ -4,7 +4,8 @@ import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/widgets/Categories.dart';
 import 'package:app/view/widgets/TransactionBox.dart';
-import 'package:app/view/widgets/pieChart.dart';
+import 'package:app/view/widgets/charts/barChart.dart';
+import 'package:app/view/widgets/charts/pieChart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,133 +29,138 @@ class SummaryTab extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          TransactionBox(
-                            color: Colors.green,
-                            value: provider.incoming,
-                            type: 'Incoming',
-                          ),
-                          TransactionBox(
-                            color: Colors.blue,
-                            value: (provider.incoming + provider.outgoing),
-                            type: 'Balance',
-                          ),
-                          TransactionBox(
-                            color: Colors.red,
-                            value: provider.outgoing,
-                            type: 'Outgoing',
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 35,
-                            width: 380,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                TextButton(
-                                    onPressed: () {
-                                      selectedTotal = true;
-                                      provider.updateValues(0, 0);
-                                    },
-                                    child: Text("Total",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            color: selectedTotal == true
-                                                ? Colors.black
-                                                : const Color.fromARGB(
-                                                    255, 200, 202, 202)))),
-                                IconButton(
-                                    onPressed: () {
-                                      if (currentYear > 0) {
-                                        currentYear--;
-                                        selectedTotal = false;
-                                        _selectedIndex = 0;
-                                        provider.updateValues(
-                                            0,
-                                            int.parse(provider
-                                                .yearList[currentYear]));
-                                      }
-                                    },
-                                    icon: Icon(Icons.arrow_back)),
-                                Text(
-                                    provider.yearList.isNotEmpty
-                                        ? provider.yearList[currentYear]
-                                        : "null",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold)),
-                                IconButton(
-                                    onPressed: () {
-                                      if (currentYear <
-                                          (provider.yearList.length - 1)) {
-                                        currentYear++;
-                                        selectedTotal = false;
-                                        _selectedIndex = 0;
-                                        provider.updateValues(
-                                            0,
-                                            int.parse(provider
-                                                .yearList[currentYear]));
-                                      }
-                                    },
-                                    icon: Icon(Icons.arrow_forward))
-                              ],
+              Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            TransactionBox(
+                              color: Colors.green,
+                              value: provider.incoming,
+                              type: 'Incoming',
                             ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 380,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              children: [
-                                for (int i = 0; i < months.length; i++)
+                            TransactionBox(
+                              color: Colors.blue,
+                              value: (provider.incoming + provider.outgoing),
+                              type: 'Balance',
+                            ),
+                            TransactionBox(
+                              color: Colors.red,
+                              value: provider.outgoing,
+                              type: 'Outgoing',
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 35,
+                              width: 380,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
                                   TextButton(
-                                    onPressed: () => {
-                                      if (provider.yearList.isNotEmpty)
-                                        {
-                                          selectedTotal = false,
-                                          _selectedIndex = i,
+                                      onPressed: () {
+                                        selectedTotal = true;
+                                        provider.updateValues(0, 0);
+                                      },
+                                      child: Text("Total",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              color: selectedTotal == true
+                                                  ? Colors.black
+                                                  : const Color.fromARGB(
+                                                      255, 200, 202, 202)))),
+                                  IconButton(
+                                      onPressed: () {
+                                        if (currentYear > 0) {
+                                          currentYear--;
+                                          selectedTotal = false;
+                                          _selectedIndex = 0;
                                           provider.updateValues(
-                                              i,
+                                              0,
                                               int.parse(provider
-                                                  .yearList[currentYear]))
-                                        },
-                                    },
-                                    style: ButtonStyle(
-                                      foregroundColor: WidgetStateProperty.all(
-                                        selectedTotal == true
-                                            ? const Color.fromARGB(
-                                                255, 200, 202, 202)
-                                            : _selectedIndex == i
-                                                ? const Color.fromARGB(
-                                                    255, 0, 0, 0)
-                                                : const Color.fromARGB(
-                                                    255, 200, 202, 202),
+                                                  .yearList[currentYear]));
+                                        }
+                                      },
+                                      icon: Icon(Icons.arrow_back)),
+                                  Text(
+                                      provider.yearList.isNotEmpty
+                                          ? provider.yearList[currentYear]
+                                          : "null",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold)),
+                                  IconButton(
+                                      onPressed: () {
+                                        if (currentYear <
+                                            (provider.yearList.length - 1)) {
+                                          currentYear++;
+                                          selectedTotal = false;
+                                          _selectedIndex = 0;
+                                          provider.updateValues(
+                                              0,
+                                              int.parse(provider
+                                                  .yearList[currentYear]));
+                                        }
+                                      },
+                                      icon: Icon(Icons.arrow_forward))
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 380,
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                children: [
+                                  for (int i = 0; i < months.length; i++)
+                                    TextButton(
+                                      onPressed: () => {
+                                        if (provider.yearList.isNotEmpty)
+                                          {
+                                            selectedTotal = false,
+                                            _selectedIndex = i,
+                                            provider.updateValues(
+                                                i,
+                                                int.parse(provider
+                                                    .yearList[currentYear]))
+                                          },
+                                      },
+                                      style: ButtonStyle(
+                                        foregroundColor:
+                                            WidgetStateProperty.all(
+                                          selectedTotal == true
+                                              ? const Color.fromARGB(
+                                                  255, 200, 202, 202)
+                                              : _selectedIndex == i
+                                                  ? const Color.fromARGB(
+                                                      255, 0, 0, 0)
+                                                  : const Color.fromARGB(
+                                                      255, 200, 202, 202),
+                                        ),
                                       ),
+                                      child: Text(months[i]),
                                     ),
-                                    child: Text(months[i]),
-                                  ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -162,6 +168,16 @@ class SummaryTab extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Categories",
+                          style: const TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w800,
+                              color: Color.fromARGB(255, 27, 118, 192)),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: GridView.count(
@@ -201,9 +217,35 @@ class SummaryTab extends StatelessWidget {
                         ),
                       ),
                       Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Categorical Overview",
+                          style: const TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w800,
+                              color: Color.fromARGB(255, 27, 118, 192)),
+                        ),
+                      ),
+                      Padding(
                           padding: const EdgeInsets.all(10.0),
                           child:
                               Pchart(dataByCategory: provider.dataByCategory)),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Daily/Monthly Overview",
+                          style: const TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w800,
+                              color: Color.fromARGB(255, 27, 118, 192)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: barChart(
+                          dataByCategory: provider.dataByMonth,
+                        ),
+                      )
                     ],
                   ),
                 ),

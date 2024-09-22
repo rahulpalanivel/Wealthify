@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:app/view/widgets/Flow.dart';
 import 'package:app/view/widgets/card.dart';
+import 'package:app/view/widgets/charts/cashFlow.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              Center(child: FLow()),
+              Center(child: cashFlow()),
               SizedBox(height: 30)
             ],
           ),
