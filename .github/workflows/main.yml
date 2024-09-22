@@ -48,7 +48,7 @@ jobs:
 
         #8 Build IPA ( IOS Build )
       - name: Build IPA
-        run: flutter build ipa --no-codesign
+        run: flutter build ipa --release
 
       - name: Compress Archives and IPAs
         run: |
@@ -96,4 +96,4 @@ jobs:
         with:
           artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,build/ios_build.tar.gz"
           tag: v${{ github.run_number }}
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}

@@ -39,7 +39,20 @@ class FLow extends StatelessWidget {
       double Others =
           provider.Others < 0 ? (provider.Others * -1) : provider.Others;
 
-      List data = [FoodnDrinks, Shopping, Groceries, Medical, Bills, Travel, Transfer, CreditCard, Education, Home, Salary, Others];
+      List data = [
+        FoodnDrinks,
+        Shopping,
+        Groceries,
+        Medical,
+        Bills,
+        Travel,
+        Transfer,
+        CreditCard,
+        Education,
+        Home,
+        Salary,
+        Others
+      ];
 
       return Container(
         height: 320,
@@ -62,7 +75,7 @@ class FLow extends StatelessWidget {
             child: PieChart(
               checkVal(data)
                   ? PieChartData(
-                      sections: data(),
+                      sections: dataSet(data),
                       sectionsSpace: 0,
                       centerSpaceRadius: 40,
                       startDegreeOffset: 90)
@@ -82,11 +95,18 @@ class FLow extends StatelessWidget {
   }
 
   bool checkVal(List data) {
-    for
+    if (data.every((e) => e == 0)) {
+      return false;
+    }
     return true;
   }
 
-  List<PieChartSectionData> data() {
-    return [];
+  List<PieChartSectionData> dataSet(List data) {
+    return List.generate(
+      data.length,
+      (i) {
+        return PieChartSectionData();
+      },
+    );
   }
 }
