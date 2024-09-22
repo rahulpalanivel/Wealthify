@@ -38,32 +38,34 @@ class FLow extends StatelessWidget {
                       ? PieChartData(
                           sections: [
                               PieChartSectionData(
-                                  value:
-                                      ((incoming / (incoming + outgoing)) * 100)
-                                          .roundToDouble(),
-                                  color: Colors.lightGreen,
-                                  radius: 70,
-                                  title:
-                                      "${((incoming / (incoming + outgoing)) * 100).roundToDouble()}"
-                                      "%",
-                                  titleStyle: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600)),
+                                value:
+                                    ((incoming / (incoming + outgoing)) * 100)
+                                        .roundToDouble(),
+                                color: Colors.lightGreen,
+                                radius: 70,
+                                title:
+                                    "${((incoming / (incoming + outgoing)) * 100).roundToDouble()}"
+                                    "%",
+                                titleStyle: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600),
+                              ),
                               PieChartSectionData(
-                                  value:
-                                      ((outgoing / (incoming + outgoing)) * 100)
-                                          .roundToDouble(),
-                                  //color: const Color.fromARGB(255, 235, 40, 26),
-                                  color: Colors.red,
-                                  radius: 70,
-                                  title:
-                                      "${((outgoing / (incoming + outgoing)) * 100).roundToDouble()}"
-                                      "%",
-                                  titleStyle: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600)),
+                                value:
+                                    ((outgoing / (incoming + outgoing)) * 100)
+                                        .roundToDouble(),
+                                //color: const Color.fromARGB(255, 235, 40, 26),
+                                color: Colors.red,
+                                radius: 70,
+                                title:
+                                    "${((outgoing / (incoming + outgoing)) * 100).roundToDouble()}"
+                                    "%",
+                                titleStyle: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ],
                           sectionsSpace: 0,
                           centerSpaceRadius: 40,
