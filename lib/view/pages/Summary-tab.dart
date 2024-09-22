@@ -3,8 +3,8 @@
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/widgets/Categories.dart';
-import 'package:app/view/widgets/Flow.dart';
 import 'package:app/view/widgets/TransactionBox.dart';
+import 'package:app/view/widgets/pieChart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,13 +14,16 @@ class SummaryTab extends StatelessWidget {
   bool selectedTotal = true;
 
   List<String> months = collections.months;
-  //List<String> yearList = repository.getYearList(dbrepository.getRecords());
   int currentYear = 0;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<summaryProvider>(
       builder: (context, provider, child) {
+        selectedTotal
+            ? provider.updateDefault(0, 0)
+            : provider.updateDefault(
+                _selectedIndex, int.parse(provider.yearList[currentYear]));
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -198,9 +201,9 @@ class SummaryTab extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: FLow(),
-                      )
+                          padding: const EdgeInsets.all(10.0),
+                          child:
+                              Pchart(dataByCategory: provider.dataByCategory)),
                     ],
                   ),
                 ),

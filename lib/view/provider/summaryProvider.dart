@@ -30,6 +30,8 @@ class summaryProvider extends ChangeNotifier {
   List<Budget> budgetRecords = dbrepository.getBudgets();
   List<String> yearList = repository.getYearList(dbrepository.getRecords());
 
+  List<double> dataByCategory = [];
+
   void defaultValues(int month, int year) {
     List<Finance> records = [];
     List<double> values = [];
@@ -76,6 +78,25 @@ class summaryProvider extends ChangeNotifier {
     transactionRecords = records;
 
     yearList = repository.getYearList(dbrepository.getRecords());
+
+    dataByCategory = [
+      Others,
+      FoodnDrinks,
+      Medical,
+      Shopping,
+      Bills,
+      Groceries,
+      Travel,
+      Transfer,
+      CreditCard,
+      Education,
+      Home,
+      Salary,
+    ];
+  }
+
+  void updateDefault(int month, int year) {
+    defaultValues(month, year);
   }
 
   void updateValues(int month, int year) {

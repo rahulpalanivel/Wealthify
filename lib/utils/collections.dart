@@ -83,6 +83,21 @@ List<String> Categories = [
   'Salary'
 ];
 
+List<Color> colorList = [
+  Colors.red,
+  Colors.lightBlue,
+  Colors.blue,
+  Colors.yellow,
+  Colors.lightGreen,
+  Colors.green,
+  Colors.orange,
+  Colors.grey,
+  Colors.amber,
+  Colors.deepPurple,
+  Colors.cyan,
+  Colors.indigo
+];
+
 List<String> months = [
   "All",
   "Jan",
