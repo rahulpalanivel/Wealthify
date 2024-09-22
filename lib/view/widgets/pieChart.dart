@@ -102,11 +102,8 @@ class FLow extends StatelessWidget {
   }
 
   List<PieChartSectionData> dataSet(List data) {
-    return List.generate(
-      data.length,
-      (i) {
-        return PieChartSectionData();
-      },
-    );
+    List<PieChartSectionData> section = [];
+
+    return section;
   }
 }
