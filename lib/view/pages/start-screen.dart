@@ -8,37 +8,51 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.lightBlue,
+        color: const Color.fromARGB(255, 149, 229, 241),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(padding: EdgeInsets.all(50)),
               Image.asset(
-                'lib/assets/images/Wealthify.png',
+                'lib/assets/images/splashLogo1.png',
               ),
-              const SizedBox(
-                height: 50,
-              ),
-              GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Main()),
+              const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Text(
+                  "Wealthify",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 11, 103, 195),
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 48),
                 ),
-                child: Container(
-                  height: 70,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+              ),
+              // Image.asset(
+              //   'lib/assets/images/logoName.png',
+              //   width: 250,
+              // ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ElevatedButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Main()),
                   ),
-                  child: const Center(
-                    child: Text(
-                      'Get Started',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
+                  style: ButtonStyle(
+                      minimumSize: const WidgetStatePropertyAll(Size(250, 70)),
+                      backgroundColor:
+                          const WidgetStatePropertyAll(Colors.lightBlue),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      )),
+                  child: const Text(
+                    "Get Started",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

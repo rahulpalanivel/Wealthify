@@ -17,7 +17,7 @@ class Addbox extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: ElevatedButton(
-                onPressed: () => {
+                onPressed: () {
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -27,7 +27,7 @@ class Addbox extends StatelessWidget {
                         selectedYear: "0",
                       );
                     },
-                  )
+                  );
                 },
                 style: ButtonStyle(
                     backgroundColor:
@@ -46,17 +46,17 @@ class Addbox extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: ElevatedButton(
-                  onPressed: () => {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return const CashRecord(
-                                selectedTotal: true,
-                                selectedYear: "0",
-                                selectedMonth: 0,
-                              );
-                            }),
-                      },
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const CashRecord(
+                            selectedTotal: true,
+                            selectedYear: "0",
+                            selectedMonth: 0,
+                          );
+                        });
+                  },
                   style: ButtonStyle(
                       backgroundColor:
                           const WidgetStatePropertyAll(Colors.lightBlue),

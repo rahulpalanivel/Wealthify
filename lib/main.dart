@@ -4,18 +4,21 @@ import 'package:app/view/pages/start-screen.dart';
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:provider/provider.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDirectory =
       await pathProvider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
 
   Hive.registerAdapter(FinanceAdapter());
   Hive.registerAdapter(BudgetAdapter());
+
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   runApp(const MyApp());
 }
@@ -35,11 +38,17 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     openBoxes();
+    splashScreen();
   }
 
   Future<void> openBoxes() async {
     financeBox = await Hive.openBox('Finance');
     budgetBox = await Hive.openBox('Budget');
+  }
+
+  void splashScreen() async {
+    await Future.delayed(const Duration(seconds: 2));
+    FlutterNativeSplash.remove();
   }
 
   @override
@@ -65,8 +74,6 @@ class _MyAppState extends State<MyApp> {
             }
           },
         ),
-        // initialRoute: '/',
-        // onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
   }
