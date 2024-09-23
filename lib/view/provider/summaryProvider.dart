@@ -30,6 +30,7 @@ class summaryProvider extends ChangeNotifier {
   List<Budget> budgetRecords = dbrepository.getBudgets();
   List<String> yearList = repository.getYearList(dbrepository.getRecords());
 
+  List<double> dataByDate = [];
   List<double> dataByMonth = [];
   List<double> dataByCategory = [];
 
@@ -95,6 +96,7 @@ class summaryProvider extends ChangeNotifier {
       Salary,
     ];
 
+    dataByDate = repository.getAmountByDate(records);
     dataByMonth = repository.getAmountByMonth(records);
   }
 
@@ -120,15 +122,17 @@ class summaryProvider extends ChangeNotifier {
 
   void deleteRecords() {
     dbrepository.deleteAllRecords();
-    List<Finance> records = [];
-    transactionRecords = records;
+    transactionRecords = [];
+    updateDefault(0, 0);
+    transactionRecords = [];
     notifyListeners();
   }
 
   void deleteBudgets() {
     dbrepository.deleteAllBudgets();
-    List<Budget> budget = [];
-    budgetRecords = budget;
+    budgetRecords = [];
+    updateBudgets();
+    budgetRecords = [];
     notifyListeners();
   }
 }

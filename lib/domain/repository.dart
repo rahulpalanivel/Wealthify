@@ -103,6 +103,22 @@ double getamtforBudget(DateTime date, String category, String duration) {
   return amount;
 }
 
+List<double> getAmountByDate(List<Finance> records) {
+  Map<int, double> dailySums = {};
+  for (var finance in records) {
+    int day = finance.date.day;
+    if (!dailySums.containsKey(day)) {
+      dailySums[day] = 0;
+    }
+    dailySums[day] = dailySums[day]! + finance.amount;
+  }
+  List<double> amount = List<double>.filled(31, 0);
+  dailySums.forEach((day, sum) {
+    amount[day - 1] = sum;
+  });
+  return amount;
+}
+
 List<double> getAmountByMonth(List<Finance> records) {
   Map<int, double> monthlySums = {};
   for (var finance in records) {

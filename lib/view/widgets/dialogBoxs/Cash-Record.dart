@@ -5,7 +5,7 @@ import 'package:app/data/repository/dbRepository.dart' as dbrepository;
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
-import 'package:app/view/widgets/DropDownBox.dart';
+import 'package:app/view/widgets/buttons/DropDownBox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

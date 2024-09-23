@@ -2,10 +2,11 @@
 
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
-import 'package:app/view/widgets/Categories.dart';
-import 'package:app/view/widgets/TransactionBox.dart';
+import 'package:app/view/widgets/cards/Categories.dart';
 import 'package:app/view/widgets/charts/barChart.dart';
+import 'package:app/view/widgets/charts/lineChart.dart';
 import 'package:app/view/widgets/charts/pieChart.dart';
+import 'package:app/view/widgets/others/TransactionBox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -242,9 +243,13 @@ class SummaryTab extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: barChart(
-                          dataByCategory: provider.dataByMonth,
-                        ),
+                        child: _selectedIndex > 0 && !selectedTotal
+                            ? linechart(
+                                dataByDate: provider.dataByDate,
+                              )
+                            : barChart(
+                                dataByCategory: provider.dataByMonth,
+                              ),
                       )
                     ],
                   ),

@@ -2,7 +2,7 @@
 
 import 'package:app/domain/repository.dart' as repository;
 import 'package:app/view/pages/transaction-datadisplay-tab.dart';
-import 'package:app/view/widgets/DropDownBox.dart';
+import 'package:app/view/widgets/buttons/DropDownBox.dart';
 import 'package:flutter/material.dart';
 
 class BankStatement extends StatefulWidget {

@@ -3,8 +3,8 @@ import 'package:app/view/provider/summaryProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CCard extends StatelessWidget {
-  const CCard({super.key});
+class creditCard extends StatelessWidget {
+  const creditCard({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,8 +4,8 @@ import 'package:app/view/pages/Budget-tab.dart';
 import 'package:app/view/pages/Summary-tab.dart';
 import 'package:app/view/pages/Transactions-tab.dart';
 import 'package:app/view/pages/home-screen.dart';
-import 'package:app/view/widgets/addBox.dart';
-import 'package:app/view/widgets/sidebar.dart';
+import 'package:app/view/widgets/dialogBoxs/addBox.dart';
+import 'package:app/view/widgets/others/sidebar.dart';
 import 'package:flutter/material.dart';
 
 class Main extends StatefulWidget {
@@ -58,7 +58,10 @@ class _MainState extends State<Main> {
               });
         },
         backgroundColor: const Color.fromARGB(255, 33, 150, 243),
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(

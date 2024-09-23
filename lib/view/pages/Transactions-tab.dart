@@ -57,15 +57,16 @@ class TransactionTab extends StatelessWidget {
                                     selectedIndex = 0;
                                     provider.updateRecords(
                                         0,
-                                        int.parse(
-                                            provider.yearList[currentYear]));
+                                        int.parse(provider.yearList.isNotEmpty
+                                            ? provider.yearList[currentYear]
+                                            : 0.toString()));
                                   }
                                 },
                                 icon: const Icon(Icons.arrow_back)),
                             Text(
                                 provider.yearList.isNotEmpty
                                     ? provider.yearList[currentYear]
-                                    : "null",
+                                    : "0",
                                 style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
                             IconButton(
@@ -77,8 +78,9 @@ class TransactionTab extends StatelessWidget {
                                     selectedIndex = 0;
                                     provider.updateRecords(
                                         0,
-                                        int.parse(
-                                            provider.yearList[currentYear]));
+                                        int.parse(provider.yearList.isNotEmpty
+                                            ? provider.yearList[currentYear]
+                                            : 0.toString()));
                                   }
                                 },
                                 icon: const Icon(Icons.arrow_forward))

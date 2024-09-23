@@ -63,8 +63,8 @@ List<Finance> getRecords() {
   return Records;
 }
 
-void deleteAllRecords() {
-  financeBox.clear();
+void deleteAllRecords() async {
+  await financeBox.clear();
 }
 
 void newBudget(String category, String duration, double amount) {
@@ -88,6 +88,6 @@ List<Budget> getBudgets() {
   return Records;
 }
 
-void deleteAllBudgets() {
-  budgetbox.clear();
+void deleteAllBudgets() async {
+  await budgetbox.clear();
 }
