@@ -8,7 +8,7 @@ final financeBox = Hive.box('Finance');
 final budgetbox = Hive.box('Budget');
 
 void addRecord(Finance finance) {
-  financeBox.add(finance);
+  financeBox.put(finance.desc, finance);
 }
 
 void addRecords(List<List<dynamic>> data, String accountName) {
@@ -61,6 +61,11 @@ List<Finance> getRecords() {
   }
   Records.sort((b, a) => a.date.compareTo(b.date));
   return Records;
+}
+
+getRecord(String key) {
+  Finance fin = financeBox.get(key);
+  return fin;
 }
 
 void deleteAllRecords() async {

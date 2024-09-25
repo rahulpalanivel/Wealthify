@@ -1,4 +1,4 @@
-import 'package:app/domain/repository.dart' as repository;
+import 'package:app/view/pages/mainScreen.dart';
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
@@ -34,14 +34,14 @@ class StartScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: ElevatedButton(
-                  // onPressed: () => Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => const Main()),
-                  // ),
-                  onPressed: () {
-                    print("res:");
-                    print(repository.readSms());
-                  },
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Main()),
+                  ),
+                  // onPressed: () {
+                  //   print("res:");
+                  //   print(repository.readSms());
+                  // },
 
                   style: ButtonStyle(
                       minimumSize: const WidgetStatePropertyAll(Size(250, 70)),

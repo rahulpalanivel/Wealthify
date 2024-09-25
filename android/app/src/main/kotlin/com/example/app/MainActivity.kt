@@ -8,6 +8,8 @@ import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
+import io.flutter.plugins.GeneratedPluginRegistrant
+
 class MainActivity: FlutterFragmentActivity(){
     private lateinit var methodChannelResult: MethodChannel.Result
     private var list = mutableListOf<String>()
@@ -40,10 +42,12 @@ class MainActivity: FlutterFragmentActivity(){
             } while(cursor.moveToNext())
         }
         cursor?.close()
-        methodChannelResult.success(list.toString())
+        methodChannelResult.success(list)
+        list.clear()
     }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        GeneratedPluginRegistrant.registerWith(flutterEngine);
         MethodChannel(
             flutterEngine.dartExecutor.binaryMessenger,
             "smsPlatform"
