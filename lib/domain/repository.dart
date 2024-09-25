@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, avoid_print
 
 import 'dart:io';
 
@@ -8,6 +8,7 @@ import 'package:app/utils/collections.dart' as collections;
 import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 List<String> formatDate(DateTime datetime) {
@@ -169,4 +170,21 @@ List<List<dynamic>> parseXLSXFile(String filePath) {
   return rows
       .map((row) => row.map((cell) => cell?.value.toString()).toList())
       .toList();
+}
+
+//////////==========>>>>>>>>>> Read SMS<<<<<<<<<<==========//////////
+
+Future<List<String>> readSms() async {
+  const smsChannel = MethodChannel("smsPlatform");
+  try {
+    final String result = await smsChannel.invokeMethod('readAllSms');
+    print(result);
+    String res = result.replaceAll('[', '').replaceAll(']', '').trim();
+    List<String> list = res.split(', ');
+
+    return list;
+  } on PlatformException catch (e) {
+    print("Internal Error: $e.message");
+  }
+  return [];
 }
