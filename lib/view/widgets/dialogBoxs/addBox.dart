@@ -1,7 +1,8 @@
+import 'package:app/data/model/Finance.dart';
 import 'package:app/view/pages/sms.dart';
-import 'package:app/view/widgets/dialogBoxs/Cash-Record.dart';
-import 'package:app/view/widgets/dialogBoxs/bank-statement.dart';
-import 'package:app/view/widgets/dialogBoxs/budget-tab-dialog-screen.dart';
+import 'package:app/view/widgets/dialogBoxs/bankStatementRecord.dart';
+import 'package:app/view/widgets/dialogBoxs/budgetRecord.dart';
+import 'package:app/view/widgets/dialogBoxs/cashRecord.dart';
 import 'package:flutter/material.dart';
 
 class Addbox extends StatelessWidget {
@@ -51,7 +52,9 @@ class Addbox extends StatelessWidget {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return const CashRecord(
+                          return CashRecord(
+                            data: Finance(
+                                "", "", DateTime.now(), "", "", "", 0.00),
                             selectedTotal: true,
                             selectedYear: "0",
                             selectedMonth: 0,

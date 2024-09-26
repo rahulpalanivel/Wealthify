@@ -49,13 +49,13 @@ List<Finance> getRecords() {
 
   for (int i = 0; i < financeBox.length; i++) {
     var finance = Finance(
-        financeBox.get(i).account,
-        financeBox.get(i).user,
-        financeBox.get(i).date,
-        financeBox.get(i).desc,
-        financeBox.get(i).trancType,
-        financeBox.get(i).trancCategory,
-        financeBox.get(i).amount);
+        financeBox.getAt(i).account,
+        financeBox.getAt(i).user,
+        financeBox.getAt(i).date,
+        financeBox.getAt(i).desc,
+        financeBox.getAt(i).trancType,
+        financeBox.getAt(i).trancCategory,
+        financeBox.getAt(i).amount);
 
     Records.add(finance);
   }
@@ -66,6 +66,10 @@ List<Finance> getRecords() {
 getRecord(String key) {
   Finance fin = financeBox.get(key);
   return fin;
+}
+
+void deleteRecord(String key) async {
+  await financeBox.delete(key);
 }
 
 void deleteAllRecords() async {

@@ -3,6 +3,7 @@
 import 'package:app/domain/repository.dart' as repository;
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/transactionProvider.dart';
+import 'package:app/view/widgets/dialogBoxs/cashRecord.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -155,50 +156,66 @@ class TransactionTab extends StatelessWidget {
                                 width: 30,
                               ),
                               Expanded(
-                                child: ListTile(
-                                  leading: Column(
-                                    children: [
-                                      Text((datemonthyear[0]),
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black)),
-                                      Text(
-                                          datemonthyear[1].substring(0, 3) +
-                                              " " +
-                                              datemonthyear[2].substring(2, 4),
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.black))
-                                    ],
-                                  ),
-                                  title: Text((rowData.desc.toString()),
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.black)),
-                                  trailing: Column(
-                                    children: [
-                                      Icon(
-                                        repository.iconForCategory(
-                                            rowData.trancCategory),
-                                        size: 30,
-                                      ),
-                                      Text(
-                                          (repository
-                                              .formatAmount(rowData.amount)),
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
-                                              color: rowData.amount >= 0
-                                                  ? Colors.green
-                                                  : Colors.red))
-                                    ],
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return CashRecord(
+                                            data: rowData,
+                                            selectedTotal: selectedTotal,
+                                            selectedYear:
+                                                provider.yearList[currentYear],
+                                            selectedMonth: selectedIndex,
+                                          );
+                                        });
+                                  },
+                                  child: ListTile(
+                                    leading: Column(
+                                      children: [
+                                        Text((datemonthyear[0]),
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black)),
+                                        Text(
+                                            datemonthyear[1].substring(0, 3) +
+                                                " " +
+                                                datemonthyear[2]
+                                                    .substring(2, 4),
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                                color: Colors.black))
+                                      ],
+                                    ),
+                                    title: Text((rowData.desc.toString()),
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.black)),
+                                    trailing: Column(
+                                      children: [
+                                        Icon(
+                                          repository.iconForCategory(
+                                              rowData.trancCategory),
+                                          size: 30,
+                                        ),
+                                        Text(
+                                            (repository
+                                                .formatAmount(rowData.amount)),
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                                color: rowData.amount >= 0
+                                                    ? Colors.green
+                                                    : Colors.red))
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

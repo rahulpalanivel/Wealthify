@@ -52,36 +52,43 @@ class _BankStatementState extends State<BankStatement> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            height: 30,
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              "Select Bank: ",
+              style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue),
+            ),
           ),
-          Text(
-            "Select Bank : ",
-            style: TextStyle(fontSize: 20),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: DropDownBox(
+              items: Items,
+              defaultItem: SelectedItem,
+              updatedValue: (String value) {
+                SelectedItem = value;
+              },
+            ),
           ),
-          SizedBox(
-            height: 15,
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        const WidgetStatePropertyAll(Colors.lightBlue),
+                    shape: WidgetStatePropertyAll(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    )),
+                onPressed: pickAndDisplayData,
+                child: Text(
+                  "Confirm",
+                  style: TextStyle(color: Colors.white),
+                )),
           ),
-          DropDownBox(
-            items: Items,
-            defaultItem: SelectedItem,
-            updatedValue: (String value) {
-              SelectedItem = value;
-            },
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          IconButton(
-              onPressed: pickAndDisplayData,
-              icon: const CircleAvatar(
-                backgroundColor: Colors.lightBlue,
-                radius: 20.0,
-                child: Icon(Icons.add, color: Colors.white),
-              )),
-          SizedBox(
-            height: 30,
-          )
         ],
       ),
     );
