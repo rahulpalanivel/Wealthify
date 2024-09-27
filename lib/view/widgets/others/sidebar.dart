@@ -1,51 +1,25 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
+import 'package:app/view/widgets/dialogBoxs/confirmationBox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key});
 
-  void wipeData(BuildContext context) {
-    final provider = Provider.of<summaryProvider>(context, listen: false);
-    final tprovider = Provider.of<transactionProvider>(context, listen: false);
-    showDialog(
-      context: context,
-      builder: (context) => SimpleDialog(
-        title: Text(
-          "Wipe Data",
-          textAlign: TextAlign.center,
-        ),
-        contentPadding: EdgeInsets.all(10),
-        children: [
-          Text(
-            "Are you sure you want to clear all data?",
-            textAlign: TextAlign.center,
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            TextButton(
-              onPressed: () => {Navigator.pop(context)},
-              child: Text("Cancel"),
-            ),
-            TextButton(
-              onPressed: () => {
-                provider.deleteRecords(),
-                provider.deleteBudgets(),
-                provider.updateValues(0, 0),
-                tprovider.deleteRecords(),
-                Navigator.pop(context)
-              },
-              child: Text("Confirm"),
-            )
-          ])
-        ],
-      ),
-    );
+  void wipeData(summaryProvider provider, transactionProvider tprovider) {
+    provider.deleteRecords();
+    provider.deleteBudgets();
+    provider.updateValues(0, 0);
+    tprovider.deleteRecords();
   }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<summaryProvider>(context, listen: false);
+    final tprovider = Provider.of<transactionProvider>(context, listen: false);
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -62,7 +36,17 @@ class Sidebar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.cleaning_services),
             title: Text("Wipe Data"),
-            onTap: () => {wipeData(context)},
+            onTap: () async {
+              bool val = await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return confirmBox(
+                        text: "Are you sure you want to wipe all data ?");
+                  });
+              if (val) {
+                wipeData(provider, tprovider);
+              }
+            },
           ),
           ListTile(
             leading: Icon(Icons.lock),

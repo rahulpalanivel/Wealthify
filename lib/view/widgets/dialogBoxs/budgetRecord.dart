@@ -4,6 +4,7 @@ import 'package:app/data/repository/dbRepository.dart' as dbrepository;
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/widgets/buttons/DropDownBox.dart';
+import 'package:app/view/widgets/dialogBoxs/alertBox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -101,11 +102,20 @@ class _BudgetDialogState extends State<BudgetDialog> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 )),
-            onPressed: () => {
-              dbrepository.newBudget(SelectedItem, SelectedDuration,
-                  double.parse(amountcontroller.text)),
-              provider.updateBudgets(),
-              Navigator.pop(context)
+            onPressed: () async {
+              amountcontroller.text.isEmpty ||
+                      double.parse(amountcontroller.text) <= 0
+                  ? await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return alertBox();
+                      })
+                  : {
+                      dbrepository.newBudget(SelectedItem, SelectedDuration,
+                          double.parse(amountcontroller.text)),
+                      provider.updateBudgets(),
+                      Navigator.pop(context)
+                    };
             },
             child: Text(
               "Confirm",

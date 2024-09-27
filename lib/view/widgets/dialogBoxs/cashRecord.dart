@@ -7,6 +7,8 @@ import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
 import 'package:app/view/widgets/buttons/DropDownBox.dart';
 import 'package:app/view/widgets/buttons/datePicker.dart';
+import 'package:app/view/widgets/dialogBoxs/alertBox.dart';
+import 'package:app/view/widgets/dialogBoxs/confirmationBox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,13 +43,27 @@ class _CashRecordState extends State<CashRecord> {
     dbrepository.addRecord(finance);
   }
 
+  void action(summaryProvider provider, transactionProvider tprovider,
+      bool selectedTotal, int selectedMonth, String selectedYear) {
+    provider.updateValues(0, 0);
+    provider.updateRecords();
+    if (selectedTotal) {
+      tprovider.updateRecords(0, 0);
+    } else {
+      tprovider.updateRecords(selectedMonth, int.parse(selectedYear));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     bool selectedTotal = widget.selectedTotal;
     String selectedYear = widget.selectedYear;
     int selectedMonth = widget.selectedMonth;
-    SelectedTranc = widget.data.trancType;
-    SelectedCategory == widget.data.trancCategory;
+
+    SelectedTranc =
+        widget.data.amount == 0.00 ? "Expense" : widget.data.trancType;
+    SelectedCategory =
+        widget.data.amount == 0.00 ? "Others" : widget.data.trancCategory;
     Finance data = widget.data;
 
     TextEditingController dateController = TextEditingController(
@@ -92,7 +108,7 @@ class _CashRecordState extends State<CashRecord> {
                       defaultItem:
                           data.amount == 0.00 ? SelectedTranc : data.trancType,
                       updatedValue: (String value) {
-                        value;
+                        SelectedTranc = value;
                       },
                     )
                   ]),
@@ -187,22 +203,25 @@ class _CashRecordState extends State<CashRecord> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           )),
-                      onPressed: () {
-                        addCashRecord(
-                            SelectedTranc,
-                            DateTime.parse(dateController.text),
-                            descController.text,
-                            SelectedCategory,
-                            double.parse(amountController.text));
-                        Navigator.pop(context);
-                        provider.updateValues(0, 0);
-                        provider.updateRecords();
-                        if (selectedTotal) {
-                          tprovider.updateRecords(0, 0);
-                        } else {
-                          tprovider.updateRecords(
-                              selectedMonth, int.parse(selectedYear));
-                        }
+                      onPressed: () async {
+                        (amountController.text.isEmpty ||
+                                double.parse(amountController.text) <= 0.0)
+                            ? await showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return alertBox();
+                                })
+                            : {
+                                addCashRecord(
+                                    SelectedTranc,
+                                    DateTime.parse(dateController.text),
+                                    descController.text,
+                                    SelectedCategory,
+                                    double.parse(amountController.text)),
+                                action(provider, tprovider, selectedTotal,
+                                    selectedMonth, selectedYear),
+                                Navigator.pop(context)
+                              };
                       },
                       child: Text(
                         "Confirm",
@@ -224,22 +243,25 @@ class _CashRecordState extends State<CashRecord> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               )),
-                          onPressed: () {
-                            addCashRecord(
-                                SelectedTranc,
-                                DateTime.parse(dateController.text),
-                                descController.text,
-                                SelectedCategory,
-                                double.parse(amountController.text));
-                            Navigator.pop(context);
-                            provider.updateValues(0, 0);
-                            provider.updateRecords();
-                            if (selectedTotal) {
-                              tprovider.updateRecords(0, 0);
-                            } else {
-                              tprovider.updateRecords(
-                                  selectedMonth, int.parse(selectedYear));
-                            }
+                          onPressed: () async {
+                            (amountController.text.isEmpty ||
+                                    double.parse(amountController.text) <= 0.0)
+                                ? await showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return alertBox();
+                                    })
+                                : {
+                                    addCashRecord(
+                                        SelectedTranc,
+                                        DateTime.parse(dateController.text),
+                                        descController.text,
+                                        SelectedCategory,
+                                        double.parse(amountController.text)),
+                                    action(provider, tprovider, selectedTotal,
+                                        selectedMonth, selectedYear),
+                                    Navigator.pop(context)
+                                  };
                           },
                           child: Text(
                             "Confirm",
@@ -255,16 +277,20 @@ class _CashRecordState extends State<CashRecord> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               )),
-                          onPressed: () {
-                            Navigator.pop(context);
-                            dbrepository.deleteRecord(data.desc);
-                            provider.updateValues(0, 0);
-                            provider.updateRecords();
-                            if (selectedTotal) {
-                              tprovider.updateRecords(0, 0);
-                            } else {
-                              tprovider.updateRecords(
-                                  selectedMonth, int.parse(selectedYear));
+                          onPressed: () async {
+                            bool val = await showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return confirmBox(
+                                    text:
+                                        "Are you sure you want to delete the Record?",
+                                  );
+                                });
+                            if (val) {
+                              dbrepository.deleteRecord(data.desc);
+                              Navigator.pop(context);
+                              action(provider, tprovider, selectedTotal,
+                                  selectedMonth, selectedYear);
                             }
                           },
                           child: Text(
