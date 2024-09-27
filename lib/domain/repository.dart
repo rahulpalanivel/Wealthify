@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, avoid_print
 
 import 'dart:io';
 
@@ -148,6 +148,13 @@ List<String> getYearList(List<Finance> records) {
   return yearList;
 }
 
+bool checkIfExist(Finance rec) {
+  if (dbrepository.getRecord(rec.desc) == null) {
+    return false;
+  }
+  return true;
+}
+
 //////////==========>>>>>>>>>> File Selection <<<<<<<<<<==========//////////
 
 Future<String?> pickXLSXFile() async {
@@ -169,4 +176,10 @@ List<List<dynamic>> parseXLSXFile(String filePath) {
   return rows
       .map((row) => row.map((cell) => cell?.value.toString()).toList())
       .toList();
+}
+
+//////////==========>>>>>>>>>> Read SMS<<<<<<<<<<==========//////////
+
+Future<List<String>> readSms() async {
+  return [];
 }

@@ -38,6 +38,11 @@ class StartScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (context) => const Main()),
                   ),
+                  // onPressed: () {
+                  //   print("res:");
+                  //   print(repository.readSms());
+                  // },
+
                   style: ButtonStyle(
                       minimumSize: const WidgetStatePropertyAll(Size(250, 70)),
                       backgroundColor:

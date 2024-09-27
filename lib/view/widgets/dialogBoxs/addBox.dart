@@ -1,6 +1,8 @@
-import 'package:app/view/widgets/dialogBoxs/Cash-Record.dart';
-import 'package:app/view/widgets/dialogBoxs/bank-statement.dart';
-import 'package:app/view/widgets/dialogBoxs/budget-tab-dialog-screen.dart';
+import 'package:app/data/model/Finance.dart';
+import 'package:app/view/pages/sms.dart';
+import 'package:app/view/widgets/dialogBoxs/bankStatementRecord.dart';
+import 'package:app/view/widgets/dialogBoxs/budgetRecord.dart';
+import 'package:app/view/widgets/dialogBoxs/cashRecord.dart';
 import 'package:flutter/material.dart';
 
 class Addbox extends StatelessWidget {
@@ -50,7 +52,9 @@ class Addbox extends StatelessWidget {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return const CashRecord(
+                          return CashRecord(
+                            data: Finance(
+                                "", "", DateTime.now(), "", "", "", 0.00),
                             selectedTotal: true,
                             selectedYear: "0",
                             selectedMonth: 0,
@@ -91,6 +95,30 @@ class Addbox extends StatelessWidget {
                       )),
                   child: const Text(
                     "Add new Budget",
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const sms();
+                      },
+                    );
+                  },
+                  style: ButtonStyle(
+                      backgroundColor:
+                          const WidgetStatePropertyAll(Colors.lightBlue),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      )),
+                  child: const Text(
+                    "Read sms",
                     style: TextStyle(color: Colors.white),
                   )),
             ),

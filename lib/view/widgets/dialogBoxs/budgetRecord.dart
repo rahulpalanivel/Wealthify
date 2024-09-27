@@ -94,13 +94,23 @@ class _BudgetDialogState extends State<BudgetDialog> {
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: const WidgetStatePropertyAll(Colors.lightBlue),
+                shape: WidgetStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                )),
             onPressed: () => {
               dbrepository.newBudget(SelectedItem, SelectedDuration,
                   double.parse(amountcontroller.text)),
               provider.updateBudgets(),
               Navigator.pop(context)
             },
-            child: Text("Confirm"),
+            child: Text(
+              "Confirm",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ],

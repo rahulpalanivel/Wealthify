@@ -11,8 +11,10 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
   final appDocumentDirectory =
       await pathProvider.getApplicationDocumentsDirectory();
+
   Hive.init(appDocumentDirectory.path);
 
   Hive.registerAdapter(FinanceAdapter());
