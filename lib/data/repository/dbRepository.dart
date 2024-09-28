@@ -63,9 +63,14 @@ List<Finance> getRecords() {
   return Records;
 }
 
-getRecord(String key) {
-  Finance fin = financeBox.get(key);
-  return fin;
+Finance getRecord(String key) {
+  var fin = financeBox.get(key);
+
+  if (fin == null) {
+    return Finance("", "", DateTime.now(), "", "", "", 0.00);
+  } else {
+    return financeBox.get(key);
+  }
 }
 
 void deleteRecord(String key) async {

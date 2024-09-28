@@ -13,32 +13,29 @@ class alertBox extends StatelessWidget {
         width: 250,
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const Text(
-                    "Please provide valid entry for all fields!!!",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
-                  ElevatedButton(
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              WidgetStatePropertyAll(Colors.lightBlue)),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        "OK",
-                        style: TextStyle(color: Colors.white),
-                      ))
-                ],
-              ),
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Text(
+                  "Please provide valid entry for all fields!!!",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+                ElevatedButton(
+                    style: const ButtonStyle(
+                        backgroundColor:
+                            WidgetStatePropertyAll(Colors.lightBlue)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      "OK",
+                      style: TextStyle(color: Colors.white),
+                    ))
+              ],
             ),
           ),
         ),

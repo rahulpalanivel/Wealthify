@@ -122,9 +122,8 @@ class summaryProvider extends ChangeNotifier {
 
   void deleteRecords() {
     dbrepository.deleteAllRecords();
-    transactionRecords = [];
-    updateDefault(0, 0);
-    transactionRecords = [];
+    List<Finance> records = [];
+    transactionRecords = records;
     notifyListeners();
   }
 

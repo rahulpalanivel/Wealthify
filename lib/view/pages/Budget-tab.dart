@@ -23,10 +23,11 @@ class BudgetTab extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       if (provider.budgetRecords.isNotEmpty) {
                         final rowData = provider.budgetRecords[index];
-                        double budgetamt = repository.getamtforBudget(
+                        double budgetamt = (repository.getamtforBudget(
                             rowData.date,
                             rowData.trancCategory,
-                            rowData.duration);
+                            rowData.duration));
+                        budgetamt = budgetamt * -1;
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(10, 1, 10, 1),
                           child: Card(
@@ -79,20 +80,19 @@ class BudgetTab extends StatelessWidget {
                                 ListTile(
                                   title: LinearPercentIndicator(
                                     lineHeight: 20,
-                                    percent:
-                                        (budgetamt / rowData.Budget_amount) < 1
+                                    percent: budgetamt > 0
+                                        ? (budgetamt / rowData.Budget_amount) <
+                                                1
                                             ? (budgetamt /
                                                 rowData.Budget_amount)
-                                            : 1,
+                                            : 1
+                                        : 0,
                                     progressColor:
                                         (budgetamt / rowData.Budget_amount) < 1
                                             ? Colors.lightGreen
                                             : Colors.red,
                                     barRadius: Radius.circular(20),
-                                    center: Text((repository.getamtforBudget(
-                                                    rowData.date,
-                                                    rowData.trancCategory,
-                                                    rowData.duration) /
+                                    center: Text((budgetamt /
                                                 rowData.Budget_amount *
                                                 100)
                                             .toStringAsFixed(0) +

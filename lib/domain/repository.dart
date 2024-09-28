@@ -5,9 +5,12 @@ import 'dart:io';
 import 'package:app/data/model/Finance.dart';
 import 'package:app/data/repository/dbRepository.dart' as dbrepository;
 import 'package:app/utils/collections.dart' as collections;
+import 'package:app/view/provider/summaryProvider.dart';
+import 'package:app/view/provider/transactionProvider.dart';
 import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 List<String> formatDate(DateTime datetime) {
@@ -96,10 +99,6 @@ double getamtforBudget(DateTime date, String category, String duration) {
             .toList(),
         category);
   }
-
-  if (amount < 0) {
-    amount = amount * -1;
-  }
   return amount;
 }
 
@@ -149,10 +148,78 @@ List<String> getYearList(List<Finance> records) {
 }
 
 bool checkIfExist(Finance rec) {
-  if (dbrepository.getRecord(rec.desc) == null) {
+  if (dbrepository.getRecord(rec.desc).amount == 0.00) {
     return false;
   }
   return true;
+}
+
+void action(summaryProvider provider, transactionProvider tprovider,
+    bool selectedTotal, int selectedMonth, String selectedYear) {
+  provider.updateValues(0, 0);
+  provider.updateRecords();
+  if (selectedTotal) {
+    tprovider.updateRecords(0, 0);
+  } else {
+    tprovider.updateRecords(selectedMonth, int.parse(selectedYear));
+  }
+}
+
+Future addRecordFromMsg(
+    summaryProvider provider, transactionProvider tprovider) async {
+  try {
+    const smsChannel = MethodChannel("smsPlatform");
+    final List<Object?> result = await smsChannel.invokeMethod('readAllSms');
+    for (int i = 0; i < result.length; i++) {
+      if (result[i].toString().contains("AxisBK") ||
+          result[i].toString().contains("AXISBK")) {
+        if (result[i].toString().contains("Debit")) {
+          String str = result[i].toString().split("Message: ")[1];
+
+          List<String> ls = str.split("\n");
+
+          double amt = double.parse(ls[1].split(" ")[1]) * -1;
+
+          DateFormat format = DateFormat("dd-MM-yy");
+
+          String dt = ls[3].toString();
+          DateTime date = format.parse(dt);
+
+          String desc = ls[4];
+
+          String trancCategory = findCategory(desc);
+
+          var finance =
+              Finance(" ", " ", date, desc, "Expense", trancCategory, amt);
+
+          if (!checkIfExist(finance)) {
+            dbrepository.addRecord(finance);
+          }
+        } else if (result[i].toString().contains("credited")) {
+          String str = result[i].toString().split("Message: ")[1];
+          List<String> ls = str.split(" ");
+
+          String dt = ls[8] + " " + ls[10];
+          DateFormat format = DateFormat("dd-MM-yy");
+          DateTime date = format.parse(dt);
+
+          double amount = double.parse(ls[1]);
+          String desc = ls[13];
+
+          String trancCategory = findCategory(desc);
+
+          var finance =
+              Finance(" ", " ", date, desc, "Income", trancCategory, amount);
+          if (!checkIfExist(finance)) {
+            dbrepository.addRecord(finance);
+          }
+        }
+      }
+    }
+    action(provider, tprovider, true, 0, "0");
+  } on PlatformException catch (e) {
+    print("Internal Error: $e.message");
+  }
 }
 
 //////////==========>>>>>>>>>> File Selection <<<<<<<<<<==========//////////

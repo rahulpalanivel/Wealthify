@@ -11,7 +11,6 @@ class Sidebar extends StatelessWidget {
   void wipeData(summaryProvider provider, transactionProvider tprovider) {
     provider.deleteRecords();
     provider.deleteBudgets();
-    provider.updateValues(0, 0);
     tprovider.deleteRecords();
   }
 
