@@ -244,9 +244,3 @@ List<List<dynamic>> parseXLSXFile(String filePath) {
       .map((row) => row.map((cell) => cell?.value.toString()).toList())
       .toList();
 }
-
-//////////==========>>>>>>>>>> Read SMS<<<<<<<<<<==========//////////
-
-Future<List<String>> readSms() async {
-  return [];
-}
