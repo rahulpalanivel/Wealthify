@@ -165,6 +165,8 @@ void action(summaryProvider provider, transactionProvider tprovider,
   }
 }
 
+//////////==========>>>>>>>>>> Message Reading <<<<<<<<<<==========//////////
+
 Future addRecordFromMsg(
     summaryProvider provider, transactionProvider tprovider) async {
   try {
