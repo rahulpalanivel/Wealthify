@@ -5,17 +5,41 @@ User friendly financial management app for expense tracking and budgeting built 
 ## Screenshots
 
 <table>
-  <tr>
-    <td>First Screen </td>
-     <td>Page 1</td>
-     <td>Page 2</td>
-  </tr>
-  <tr>
-    <td><img src="lib\assets\screenshots\ss2.jpg" width=270 height=480></td>
-    <td><img src="lib\assets\screenshots\ss3.jpg" width=270 height=480></td>
-    <td><img src="lib\assets\screenshots\ss3.jpg" width=270 height=480></td>
-  </tr>
- </table>
+    <tr>
+        <td>First Screen </td>
+        <td>Summary Page</td>
+        <td>Home Page</td>
+    </tr>
+    <tr>
+        <td><img src="lib\assets\screenshots\ss2.jpg" width=270 height=480></td>
+        <td><img src="lib\assets\screenshots\ss1.jpg" width=270 height=480></td>
+        <td><img src="lib\assets\screenshots\ss3.jpg" width=270 height=480></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>Transactions by Category </td>
+        <td>Transactions by Month</td>
+        <td>Transactions by Date</td>
+    </tr>
+    <tr>
+        <td><img src="lib\assets\screenshots\ss4.jpg" width=270 height=480></td>
+        <td><img src="lib\assets\screenshots\ss7.jpg" width=270 height=480></td>
+        <td><img src="lib\assets\screenshots\ss8.jpg" width=270 height=480></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>Transactions Records </td>
+        <td>Budgeting</td>
+    </tr>
+    <tr>
+        <td><img src="lib\assets\screenshots\ss6.jpg" width=270 height=480></td>
+        <td><img src="lib\assets\screenshots\ss5.jpg" width=270 height=480></td>
+    </tr>
+</table>
 
 ## Features
 
