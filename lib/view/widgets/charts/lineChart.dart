@@ -5,14 +5,14 @@ import 'package:provider/provider.dart';
 
 class linechart extends StatelessWidget {
   const linechart({super.key, required this.dataByDate});
-  final List<double> dataByDate;
+  final Map<int, List<double>> dataByDate;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<summaryProvider>(builder: (context, provider, child) {
       return Container(
-        height: 420,
-        width: 380,
+        height: 450,
+        width: 400,
         decoration: BoxDecoration(
           boxShadow: const [
             BoxShadow(
@@ -25,10 +25,11 @@ class linechart extends StatelessWidget {
           color: const Color.fromARGB(255, 243, 237, 247),
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Center(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
           child: SizedBox(
-            width: 350,
-            height: 380,
+            width: 380,
+            height: 400,
             child: LineChart(
               duration: Durations.medium3,
               LineChartData(
@@ -52,8 +53,12 @@ class linechart extends StatelessWidget {
                             getTitlesWidget: bottomTitles))),
                 lineBarsData: [
                   LineChartBarData(
-                    spots: lineData(),
-                    color: Colors.cyan,
+                    spots: lineDataNeg(),
+                    color: Colors.red,
+                  ),
+                  LineChartBarData(
+                    spots: lineDataPos(),
+                    color: Colors.green,
                   )
                 ],
               ),
@@ -64,13 +69,23 @@ class linechart extends StatelessWidget {
     });
   }
 
-  List<FlSpot> lineData() {
-    return List.generate(dataByDate.length, (i) {
+  List<FlSpot> lineDataPos() {
+    return List.generate(dataByDate[0]!.length, (i) {
       return FlSpot(
           (i + 1).toDouble(),
-          dataByDate[i] < 0
-              ? (dataByDate[i] * -1).roundToDouble()
-              : dataByDate[i].roundToDouble());
+          dataByDate[0]![i] < 0
+              ? (dataByDate[0]![i] * -1).roundToDouble()
+              : dataByDate[0]![i].roundToDouble());
+    });
+  }
+
+  List<FlSpot> lineDataNeg() {
+    return List.generate(dataByDate[1]!.length, (i) {
+      return FlSpot(
+          (i + 1).toDouble(),
+          dataByDate[1]![i] < 0
+              ? (dataByDate[1]![i] * -1).roundToDouble()
+              : dataByDate[1]![i].roundToDouble());
     });
   }
 

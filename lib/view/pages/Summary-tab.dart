@@ -248,7 +248,7 @@ class SummaryTab extends StatelessWidget {
                                 dataByDate: provider.dataByDate,
                               )
                             : barChart(
-                                dataByCategory: provider.dataByMonth,
+                                dataByMonth: provider.dataByMonth,
                               ),
                       )
                     ],

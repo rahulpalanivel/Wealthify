@@ -102,35 +102,63 @@ double getamtforBudget(DateTime date, String category, String duration) {
   return amount;
 }
 
-List<double> getAmountByDate(List<Finance> records) {
-  Map<int, double> dailySums = {};
+Map<int, List<double>> getAmountByDate(List<Finance> records) {
+  Map<int, double> dailySumsPos = {};
+  Map<int, double> dailySumsNeg = {};
   for (var finance in records) {
     int day = finance.date.day;
-    if (!dailySums.containsKey(day)) {
-      dailySums[day] = 0;
+    if (!dailySumsPos.containsKey(day)) {
+      dailySumsPos[day] = 0;
     }
-    dailySums[day] = dailySums[day]! + finance.amount;
+    if (!dailySumsNeg.containsKey(day)) {
+      dailySumsNeg[day] = 0;
+    }
+    finance.amount > 0
+        ? dailySumsPos[day] = dailySumsPos[day]! + finance.amount
+        : dailySumsNeg[day] = dailySumsNeg[day]! + finance.amount;
   }
-  List<double> amount = List<double>.filled(31, 0);
-  dailySums.forEach((day, sum) {
-    amount[day - 1] = sum;
+  List<double> amountPos = List<double>.filled(31, 0);
+  List<double> amountNeg = List<double>.filled(31, 0);
+
+  dailySumsPos.forEach((day, sum) {
+    amountPos[day - 1] = sum;
   });
+  dailySumsNeg.forEach((day, sum) {
+    amountNeg[day - 1] = sum;
+  });
+
+  Map<int, List<double>> amount = {0: amountPos, 1: amountNeg};
+
   return amount;
 }
 
-List<double> getAmountByMonth(List<Finance> records) {
-  Map<int, double> monthlySums = {};
+Map<int, List<double>> getAmountByMonth(List<Finance> records) {
+  Map<int, double> monthlySumsPos = {};
+  Map<int, double> monthlySumsNeg = {};
   for (var finance in records) {
     int month = finance.date.month;
-    if (!monthlySums.containsKey(month)) {
-      monthlySums[month] = 0;
+    if (!monthlySumsPos.containsKey(month)) {
+      monthlySumsPos[month] = 0;
     }
-    monthlySums[month] = monthlySums[month]! + finance.amount;
+    if (!monthlySumsNeg.containsKey(month)) {
+      monthlySumsNeg[month] = 0;
+    }
+    finance.amount > 0
+        ? monthlySumsPos[month] = monthlySumsPos[month]! + finance.amount
+        : monthlySumsNeg[month] = monthlySumsNeg[month]! + finance.amount;
   }
-  List<double> amount = List<double>.filled(12, 0);
-  monthlySums.forEach((month, sum) {
-    amount[month - 1] = sum;
+  List<double> amountPos = List<double>.filled(12, 0);
+  List<double> amountNeg = List<double>.filled(12, 0);
+
+  monthlySumsPos.forEach((month, sum) {
+    amountPos[month - 1] = sum;
   });
+  monthlySumsNeg.forEach((month, sum) {
+    amountNeg[month - 1] = sum;
+  });
+
+  Map<int, List<double>> amount = {0: amountPos, 1: amountNeg};
+
   return amount;
 }
 

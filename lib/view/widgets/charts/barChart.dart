@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class barChart extends StatelessWidget {
-  const barChart({super.key, required this.dataByCategory});
-  final List<double> dataByCategory;
+  const barChart({super.key, required this.dataByMonth});
+  final Map<int, List<double>> dataByMonth;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<summaryProvider>(builder: (context, provider, child) {
       return Container(
-        height: 420,
-        width: 380,
+        height: 450,
+        width: 400,
         decoration: BoxDecoration(
           boxShadow: const [
             BoxShadow(
@@ -25,9 +25,11 @@ class barChart extends StatelessWidget {
           color: const Color.fromARGB(255, 243, 237, 247),
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Center(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(1, 50, 1, 10),
           child: SizedBox(
             height: 380,
+            width: 400,
             child: BarChart(
               swapAnimationDuration: Durations.medium3,
               BarChartData(
@@ -58,16 +60,23 @@ class barChart extends StatelessWidget {
   }
 
   List<BarChartGroupData> dataSet() {
-    return List.generate(dataByCategory.length, (i) {
+    return List.generate(dataByMonth[0]!.length, (i) {
       return BarChartGroupData(
         x: i,
         barRods: [
           BarChartRodData(
-              toY: dataByCategory[i].roundToDouble() < 0
-                  ? dataByCategory[i].roundToDouble() * -1
-                  : dataByCategory[i].roundToDouble(),
-              color: Colors.cyan,
-              width: 15,
+              toY: dataByMonth[0]![i].roundToDouble() < 0
+                  ? dataByMonth[0]![i].roundToDouble() * -1
+                  : dataByMonth[0]![i].roundToDouble(),
+              color: Colors.green,
+              width: 12,
+              borderRadius: BorderRadius.circular(4)),
+          BarChartRodData(
+              toY: dataByMonth[1]![i].roundToDouble() < 0
+                  ? dataByMonth[1]![i].roundToDouble() * -1
+                  : dataByMonth[1]![i].roundToDouble(),
+              color: Colors.red,
+              width: 12,
               borderRadius: BorderRadius.circular(4)),
         ],
       );
