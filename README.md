@@ -11,9 +11,9 @@ User friendly financial management app for expense tracking and budgeting built 
         <td>Summary Page</td>
     </tr>
     <tr>
-        <td><img src="lib\assets\screenshots\ss2.jpg" width=270 height=520></td>
-        <td><img src="lib\assets\screenshots\ss3.jpg" width=270 height=520></td>
-        <td><img src="lib\assets\screenshots\ss1.jpg" width=270 height=520></td>
+        <td><img src="lib\assets\screenshots\ss2.jpg" width=270 height=525></td>
+        <td><img src="lib\assets\screenshots\ss3.jpg" width=270 height=525></td>
+        <td><img src="lib\assets\screenshots\ss1.jpg" width=270 height=525></td>
     </tr>
 </table>
 
@@ -24,9 +24,9 @@ User friendly financial management app for expense tracking and budgeting built 
         <td>Transactions by Date</td>
     </tr>
     <tr>
-        <td><img src="lib\assets\screenshots\ss4.jpg" width=270 height=520></td>
-        <td><img src="lib\assets\screenshots\ss7.jpg" width=270 height=520></td>
-        <td><img src="lib\assets\screenshots\ss8.jpg" width=270 height=520></td>
+        <td><img src="lib\assets\screenshots\ss4.jpg" width=270 height=525></td>
+        <td><img src="lib\assets\screenshots\ss7.jpg" width=270 height=525></td>
+        <td><img src="lib\assets\screenshots\ss8.jpg" width=270 height=525></td>
     </tr>
 </table>
 
@@ -36,8 +36,8 @@ User friendly financial management app for expense tracking and budgeting built 
         <td>Budgeting</td>
     </tr>
     <tr>
-        <td><img src="lib\assets\screenshots\ss6.jpg" width=270 height=520></td>
-        <td><img src="lib\assets\screenshots\ss5.jpg" width=270 height=520></td>
+        <td><img src="lib\assets\screenshots\ss6.jpg" width=270 height=525></td>
+        <td><img src="lib\assets\screenshots\ss5.jpg" width=270 height=525></td>
     </tr>
 </table>
 
