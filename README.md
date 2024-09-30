@@ -4,6 +4,19 @@ User friendly financial management app for expense tracking and budgeting built 
 
 ## Screenshots
 
+<table>
+  <tr>
+    <td>First Screen </td>
+     <td>Page 1</td>
+     <td>Page 2</td>
+  </tr>
+  <tr>
+    <td><img src="lib\assets\screenshots\ss2.jpg" width=270 height=480></td>
+    <td><img src="lib\assets\screenshots\ss3.jpg" width=270 height=480></td>
+    <td><img src="lib\assets\screenshots\ss3.jpg" width=270 height=480></td>
+  </tr>
+ </table>
+
 ## Features
 
 - Analyze financial transactions by year/month/day.
