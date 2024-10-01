@@ -13,44 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-List<String> formatDate(DateTime datetime) {
-  String date = DateFormat.d().format(datetime);
-  String monthName = DateFormat.MMMM().format(datetime);
-  String year = DateFormat.y().format(datetime);
-  List<String> datemonth = [date, monthName, year];
-  return datemonth;
-}
-
-String formatAmount(double amount) {
-  final formatter = NumberFormat.currency(locale: 'hi_IN', symbol: '₹');
-  String value = formatter.format(amount);
-  return value;
-}
-
-IconData iconForCategory(String Transcategory) {
-  int idx = 0;
-  idx = collections.Categories.indexOf(Transcategory);
-  if (idx == -1) {
-    idx = 0;
-  }
-  return collections.Icon[idx];
-}
-
-String findCategory(String desc) {
-  String category = "Others";
-  for (int i = 0; i < collections.categoriesAndKeywords.length; i++) {
-    for (int j = 1; j < collections.categoriesAndKeywords[i].length; j++) {
-      if (desc
-          .toLowerCase()
-          .contains(collections.categoriesAndKeywords[i][j])) {
-        category = collections.categoriesAndKeywords[i][0];
-        break;
-      }
-    }
-  }
-  return category;
-}
-
 List<double> getAmount(List<Finance> Records) {
   double income = 0;
   double expense = 0;
@@ -182,17 +144,6 @@ bool checkIfExist(Finance rec) {
   return true;
 }
 
-void action(summaryProvider provider, transactionProvider tprovider,
-    bool selectedTotal, int selectedMonth, String selectedYear) {
-  provider.updateValues(0, 0);
-  provider.updateRecords();
-  if (selectedTotal) {
-    tprovider.updateRecords(0, 0);
-  } else {
-    tprovider.updateRecords(selectedMonth, int.parse(selectedYear));
-  }
-}
-
 //////////==========>>>>>>>>>> Message Reading <<<<<<<<<<==========//////////
 
 Future addRecordFromMsg(
@@ -201,8 +152,7 @@ Future addRecordFromMsg(
     const smsChannel = MethodChannel("smsPlatform");
     final List<Object?> result = await smsChannel.invokeMethod('readAllSms');
     for (int i = 0; i < result.length; i++) {
-      if (result[i].toString().contains("AxisBK") ||
-          result[i].toString().contains("AXISBK")) {
+      if (result[i].toString().toLowerCase().contains("axisbk")) {
         if (result[i].toString().contains("Debit")) {
           String str = result[i].toString().split("Message: ")[1];
 
@@ -252,6 +202,17 @@ Future addRecordFromMsg(
   }
 }
 
+void action(summaryProvider provider, transactionProvider tprovider,
+    bool selectedTotal, int selectedMonth, String selectedYear) {
+  provider.updateValues(0, 0);
+  provider.updateRecords();
+  if (selectedTotal) {
+    tprovider.updateRecords(0, 0);
+  } else {
+    tprovider.updateRecords(selectedMonth, int.parse(selectedYear));
+  }
+}
+
 //////////==========>>>>>>>>>> File Selection <<<<<<<<<<==========//////////
 
 Future<String?> pickXLSXFile() async {
@@ -273,4 +234,44 @@ List<List<dynamic>> parseXLSXFile(String filePath) {
   return rows
       .map((row) => row.map((cell) => cell?.value.toString()).toList())
       .toList();
+}
+
+//////////==========>>>>>>>>>> Helper Functions <<<<<<<<<<==========//////////
+
+List<String> formatDate(DateTime datetime) {
+  String date = DateFormat.d().format(datetime);
+  String monthName = DateFormat.MMMM().format(datetime);
+  String year = DateFormat.y().format(datetime);
+  List<String> datemonth = [date, monthName, year];
+  return datemonth;
+}
+
+String formatAmount(double amount) {
+  final formatter = NumberFormat.currency(locale: 'hi_IN', symbol: '₹');
+  String value = formatter.format(amount);
+  return value;
+}
+
+IconData iconForCategory(String Transcategory) {
+  int idx = 0;
+  idx = collections.Categories.indexOf(Transcategory);
+  if (idx == -1) {
+    idx = 0;
+  }
+  return collections.Icon[idx];
+}
+
+String findCategory(String desc) {
+  String category = "Others";
+  for (int i = 0; i < collections.categoriesAndKeywords.length; i++) {
+    for (int j = 1; j < collections.categoriesAndKeywords[i].length; j++) {
+      if (desc
+          .toLowerCase()
+          .contains(collections.categoriesAndKeywords[i][j])) {
+        category = collections.categoriesAndKeywords[i][0];
+        break;
+      }
+    }
+  }
+  return category;
 }
