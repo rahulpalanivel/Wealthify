@@ -12,10 +12,25 @@ class transactionProvider extends ChangeNotifier {
   List<Finance> transactionRecords = [];
   List<String> yearList = [];
 
-  void defaultValues() {
-    transactionRecords = dbrepository.getRecords();
+  void defaultValues(int month, int year) {
+    if (month == 0 && year == 0) {
+      transactionRecords = dbrepository.getRecords();
+    } else if (month != 0) {
+      transactionRecords = dbrepository
+          .getRecords()
+          .where((element) =>
+              repository.formatDate(element.date)[1].substring(0, 3) ==
+                  months[month] &&
+              repository.formatDate(element.date)[2] == year.toString())
+          .toList();
+    } else {
+      transactionRecords = dbrepository
+          .getRecords()
+          .where((element) =>
+              repository.formatDate(element.date)[2] == year.toString())
+          .toList();
+    }
     yearList = repository.getYearList(dbrepository.getRecords());
-    notifyListeners();
   }
 
   void updateRecords(int month, int year) {
