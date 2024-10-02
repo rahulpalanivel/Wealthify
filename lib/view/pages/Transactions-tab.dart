@@ -23,6 +23,10 @@ class TransactionTab extends StatelessWidget {
 
     return Consumer<transactionProvider>(
       builder: (context, provider, child) {
+        selectedTotal
+            ? provider.updateRecords(0, 0)
+            : provider.updateRecords(
+                selectedIndex, int.parse(provider.yearList[currentYear]));
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

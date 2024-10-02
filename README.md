@@ -1,6 +1,10 @@
 # Wealthify
 
-User friendly financial management app for expense tracking and budgeting built with automated transaction recording features.
+A User friendly financial management app for expense tracking and budgeting built with automated transaction recording features.
+
+## About
+
+Wealthify is an app built primarly for expense tracking and budgeting, it is designed to fulfill all the requirements of an expense tracker with a simple and user-friendly interface. The user has options to automate the primary task of manually recording transactions leading to an efficient and smooth user-experiance. The app is cross platform developed using the flutter sdk and Dart language. All the transaction details and records are stored locally within the device using hive database. Provider state management is used to maintain the flow of data. The app runs completely offline and requires no network access. Various graphs are used for better visualization of transactions which can be further categorized by Year, month and day. Users can also set budgets for various transaction categories chosen for a specific month or year. Users can manually add new transaction records or the app can automate the process by either processing the users bank statement or by processing the payment confirmation sms sent from users Bank(both requires permission from user). Overall the app aims to provide an efficient way to analyze and visualize the users financial transactions, while ensuring a smooth experience.
 
 ## Screenshots
 
@@ -54,7 +58,7 @@ User friendly financial management app for expense tracking and budgeting built 
 
 ## Demo
 
-Insert gif or link to demo
+link to demo
 
 ## Tech Stack
 
