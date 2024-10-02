@@ -7,9 +7,16 @@ import 'package:app/utils/collections.dart' as collections;
 import 'package:flutter/material.dart';
 
 class transactionProvider extends ChangeNotifier {
-  List<Finance> transactionRecords = dbrepository.getRecords();
   List<String> months = collections.months;
-  List<String> yearList = repository.getYearList(dbrepository.getRecords());
+
+  List<Finance> transactionRecords = [];
+  List<String> yearList = [];
+
+  void defaultValues() {
+    transactionRecords = dbrepository.getRecords();
+    yearList = repository.getYearList(dbrepository.getRecords());
+    notifyListeners();
+  }
 
   void updateRecords(int month, int year) {
     if (month == 0 && year == 0) {
@@ -29,6 +36,7 @@ class transactionProvider extends ChangeNotifier {
               repository.formatDate(element.date)[2] == year.toString())
           .toList();
     }
+
     yearList = repository.getYearList(dbrepository.getRecords());
     notifyListeners();
   }

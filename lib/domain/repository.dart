@@ -182,15 +182,10 @@ bool checkIfExist(Finance rec) {
   return true;
 }
 
-void action(summaryProvider provider, transactionProvider tprovider,
-    bool selectedTotal, int selectedMonth, String selectedYear) {
+void action(summaryProvider provider, transactionProvider tprovider) {
   provider.updateValues(0, 0);
   provider.updateRecords();
-  if (selectedTotal) {
-    tprovider.updateRecords(0, 0);
-  } else {
-    tprovider.updateRecords(selectedMonth, int.parse(selectedYear));
-  }
+  tprovider.updateRecords(0, 0);
 }
 
 //////////==========>>>>>>>>>> Message Reading <<<<<<<<<<==========//////////
@@ -243,9 +238,9 @@ Future addRecordFromMsg(
             dbrepository.addRecord(finance);
           }
         }
+        action(provider, tprovider);
       }
     }
-    action(provider, tprovider, true, 0, "0");
   } on PlatformException catch (e) {
     print("Internal Error: $e.message");
   }

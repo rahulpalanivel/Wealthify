@@ -95,7 +95,7 @@ class SummaryTab extends StatelessWidget {
                                   Text(
                                       provider.yearList.isNotEmpty
                                           ? provider.yearList[currentYear]
-                                          : "0",
+                                          : "",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold)),
