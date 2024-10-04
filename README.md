@@ -58,7 +58,7 @@ Wealthify is an app built primarly for expense tracking and budgeting, it is des
 
 ## Demo
 
-<video src="lib\assets\video\WealthifyDemo.mp4"></video>
+<video src="lib\assets\video\WealthifyDemo.mp4">
 
 ## Tech Stack
 
