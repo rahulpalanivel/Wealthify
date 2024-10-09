@@ -23,7 +23,6 @@ class StartScreen extends StatelessWidget {
                   style: TextStyle(
                       color: Color.fromARGB(255, 11, 103, 195),
                       fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
                       fontSize: 48),
                 ),
               ),
