@@ -61,7 +61,7 @@ class SummaryTab extends StatelessWidget {
                           children: [
                             SizedBox(
                               height: 35,
-                              width: 380,
+                              width: 350,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
@@ -81,8 +81,9 @@ class SummaryTab extends StatelessWidget {
                                                       255, 200, 202, 202)))),
                                   IconButton(
                                       onPressed: () {
-                                        if (currentYear > 0) {
-                                          currentYear--;
+                                        if (currentYear <
+                                            (provider.yearList.length - 1)) {
+                                          currentYear++;
                                           selectedTotal = false;
                                           _selectedIndex = 0;
                                           provider.updateValues(
@@ -98,12 +99,15 @@ class SummaryTab extends StatelessWidget {
                                           : "",
                                       style: TextStyle(
                                           fontSize: 15,
-                                          fontWeight: FontWeight.bold)),
+                                          fontWeight: FontWeight.bold,
+                                          color: selectedTotal == false
+                                              ? Colors.black
+                                              : const Color.fromARGB(
+                                                  255, 200, 202, 202))),
                                   IconButton(
                                       onPressed: () {
-                                        if (currentYear <
-                                            (provider.yearList.length - 1)) {
-                                          currentYear++;
+                                        if (currentYear > 0) {
+                                          currentYear--;
                                           selectedTotal = false;
                                           _selectedIndex = 0;
                                           provider.updateValues(
@@ -122,7 +126,7 @@ class SummaryTab extends StatelessWidget {
                           children: [
                             SizedBox(
                               height: 50,
-                              width: 380,
+                              width: 350,
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 shrinkWrap: true,

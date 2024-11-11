@@ -40,7 +40,7 @@ class TransactionTab extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: 35,
-                        width: 400,
+                        width: 375,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -59,8 +59,9 @@ class TransactionTab extends StatelessWidget {
                                                 255, 200, 202, 202)))),
                             IconButton(
                                 onPressed: () {
-                                  if (currentYear > 0) {
-                                    currentYear--;
+                                  if (currentYear <
+                                      (provider.yearList.length - 1)) {
+                                    currentYear++;
                                     selectedTotal = false;
                                     selectedIndex = 0;
                                     provider.updateRecords(
@@ -75,13 +76,17 @@ class TransactionTab extends StatelessWidget {
                                 provider.yearList.isNotEmpty
                                     ? provider.yearList[currentYear]
                                     : "",
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold)),
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: selectedTotal == false
+                                        ? Colors.black
+                                        : const Color.fromARGB(
+                                            255, 200, 202, 202))),
                             IconButton(
                                 onPressed: () {
-                                  if (currentYear <
-                                      (provider.yearList.length - 1)) {
-                                    currentYear++;
+                                  if (currentYear > 0) {
+                                    currentYear--;
                                     selectedTotal = false;
                                     selectedIndex = 0;
                                     provider.updateRecords(
@@ -102,7 +107,7 @@ class TransactionTab extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: 50,
-                        width: 400,
+                        width: 375,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
