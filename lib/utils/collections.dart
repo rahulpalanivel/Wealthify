@@ -9,7 +9,10 @@ List<List<String>> categoriesAndKeywords = [
     'doctor',
     'pharmacy',
     'clinic',
-    'dental'
+    'dental',
+    'mhjpl',
+    'practo',
+    'apollo'
   ],
   ['Shopping', 'lifestyle', 'fashion', 'amazon', 'flipkart'],
   ['Bills', 'airtel', 'jio', 'bescom', 'bwssb', 'broadband', 'fibre'],
@@ -24,9 +27,23 @@ List<List<String>> categoriesAndKeywords = [
     'sri chowdeshwari',
     'elimalai'
   ],
-  ['Travel', 'irctc', 'goibbo'],
-  ['Food & Drinks', 'swiggy', 'zomato', 'udupi', 'sweets', 'tea'],
-  ['Transfer', 'bank to bank transfer'],
+  ['Travel', 'irctc', 'goibibo', 'ibibo', 'transport', 'rapido'],
+  [
+    'Food & Drinks',
+    'swiggy',
+    'zomato',
+    'udupi',
+    'sweets',
+    'tea',
+    'hotel',
+    'restaurant',
+    'canteen',
+    'oliv',
+    'kommuri',
+    'bakery',
+    'food'
+  ],
+  ['Transfer', 'bank to bank transfer', 'axis', 'palanivel'],
   ['Credit Card', 'ccbp'],
   [
     'Education',
@@ -36,7 +53,9 @@ List<List<String>> categoriesAndKeywords = [
     'rcis',
     'school',
     'college',
-    'university'
+    'university',
+    'institute',
+    'vellore'
   ],
   [
     'Home',
