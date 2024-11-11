@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, avoid_print
+// ignore_for_file: non_constant_identifier_names, avoid_print, prefer_interpolation_to_compose_strings
 
 import 'dart:io';
 
@@ -40,9 +40,8 @@ String findCategory(String desc) {
   String category = "Others";
   for (int i = 0; i < collections.categoriesAndKeywords.length; i++) {
     for (int j = 1; j < collections.categoriesAndKeywords[i].length; j++) {
-      if (desc
-          .toLowerCase()
-          .contains(collections.categoriesAndKeywords[i][j])) {
+      if (desc.toLowerCase().contains(
+          collections.categoriesAndKeywords[i][j].toString().toLowerCase())) {
         category = collections.categoriesAndKeywords[i][0];
         break;
       }
@@ -172,7 +171,7 @@ List<String> getYearList(List<Finance> records) {
       yearList.add(i.toString());
     }
   }
-  return yearList;
+  return yearList.reversed.toList();
 }
 
 bool checkIfExist(Finance rec) {
@@ -195,9 +194,11 @@ Future addRecordFromMsg(
   try {
     const smsChannel = MethodChannel("smsPlatform");
     final List<Object?> result = await smsChannel.invokeMethod('readAllSms');
+
     for (int i = 0; i < result.length; i++) {
       if (result[i].toString().toLowerCase().contains("axisbk")) {
-        if (result[i].toString().contains("Debit")) {
+        if (result[i].toString().contains("Debit") &&
+            result[i].toString().contains("INR")) {
           String str = result[i].toString().split("Message: ")[1];
 
           List<String> ls = str.split("\n");
@@ -219,7 +220,82 @@ Future addRecordFromMsg(
           if (!checkIfExist(finance)) {
             dbrepository.addRecord(finance);
           }
-        } else if (result[i].toString().contains("credited")) {
+        } else if (result[i].toString().contains("debited") &&
+            result[i].toString().contains("INR") &&
+            !result[i].toString().contains("requested") &&
+            !result[i].toString().contains("debited from Axis")) {
+          String str = result[i].toString().split("Message: ")[1];
+
+          List<String> ls = str.split("\n");
+
+          double amt = double.parse(ls[0].split(" ")[1]) * -1;
+
+          DateFormat format = DateFormat("dd-MM-yy");
+
+          String dt = ls[2].toString();
+          dt = dt.split(",")[0];
+          DateTime date = format.parse(dt);
+
+          String desc = ls[3];
+
+          String trancCategory = findCategory(desc);
+
+          var finance =
+              Finance(" ", " ", date, desc, "Expense", trancCategory, amt);
+
+          if (!checkIfExist(finance)) {
+            dbrepository.addRecord(finance);
+          }
+        } else if (result[i].toString().contains("debited") &&
+            result[i].toString().contains("INR") &&
+            !result[i].toString().contains("requested") &&
+            result[i].toString().contains("debited from Axis")) {
+          String str = result[i].toString().split("Message: ")[1];
+          List<String> ls = str.split(" ");
+
+          String dt = ls[10] + " " + ls[11];
+          DateFormat format = DateFormat("dd-MM-yy");
+          DateTime date = format.parse(dt);
+
+          double amount = double.parse(ls[1]) * -1;
+          String desc =
+              ls.sublist(10).toString().replaceAll("[", "").replaceAll("]", "");
+
+          String trancCategory = findCategory(desc);
+
+          var finance =
+              Finance(" ", " ", date, desc, "Income", trancCategory, amount);
+          if (!checkIfExist(finance)) {
+            dbrepository.addRecord(finance);
+          }
+        } else if (result[i].toString().contains("credited") &&
+            result[i].toString().contains("INR") &&
+            !result[i].toString().contains("to A/c no.")) {
+          String str = result[i].toString().split("Message: ")[1];
+
+          List<String> ls = str.split("\n");
+
+          double amt = double.parse(ls[0].split(" ")[1]);
+
+          DateFormat format = DateFormat("dd-MM-yy");
+
+          String dt = ls[2].toString();
+          dt = dt.split(",")[0];
+          DateTime date = format.parse(dt);
+
+          String desc = ls[3];
+
+          String trancCategory = findCategory(desc);
+
+          var finance =
+              Finance(" ", " ", date, desc, "Expense", trancCategory, amt);
+
+          if (!checkIfExist(finance)) {
+            dbrepository.addRecord(finance);
+          }
+        } else if (result[i].toString().contains("credited") &&
+            result[i].toString().contains("INR") &&
+            result[i].toString().contains("to A/c no.")) {
           String str = result[i].toString().split("Message: ")[1];
           List<String> ls = str.split(" ");
 
@@ -242,7 +318,8 @@ Future addRecordFromMsg(
       }
     }
   } on PlatformException catch (e) {
-    print("Internal Error: $e.message");
+    print(
+        "----------------->Internal Error<----------------------: $e.message");
   }
 }
 
