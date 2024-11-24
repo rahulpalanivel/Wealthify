@@ -1,6 +1,15 @@
-# Wealthify
+<p align="center">
+  <img width="140" src="lib\assets\icon\appLogo.png" />  
+  <h1 align="center">Wealthify</h1>
+  <h3 align="center">A User friendly financial management app for expense tracking and budgeting built with automated transaction recording features.</h3>
+</p>
 
-A User friendly financial management app for expense tracking and budgeting built with automated transaction recording features.
+
+<p align="center">
+  <a href="#" alt="Version"><img src="https://img.shields.io/badge/Version-1.0.4-brightgreen.svg?style=for-the-badge" /></a>
+<!--   <a href="https://github.com/rahulpalanivel/Wealthify/blob/master/LICENSE" alt="Version"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg?style=for-the-badge" /></a> -->
+  <a href="https://github.com/rahulpalanivel/Wealthify/releases" alt="Version"><img src="https://img.shields.io/badge/Download-apk-blue?style=for-the-badge" /></a>
+</p>
 
 ## About
 
