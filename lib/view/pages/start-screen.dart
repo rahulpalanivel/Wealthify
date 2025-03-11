@@ -1,3 +1,4 @@
+import 'package:app/data/repository/dbRepository.dart' as dbrepository;
 import 'package:app/view/pages/mainScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,7 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool userExists = dbrepository.userExist();
     return Scaffold(
       body: Container(
         color: const Color.fromARGB(255, 149, 229, 241),
@@ -51,8 +53,8 @@ class StartScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       )),
-                  child: const Text(
-                    "Get Started",
+                  child: Text(
+                    userExists ? "Log In" : "Get Started",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
