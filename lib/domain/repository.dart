@@ -187,6 +187,33 @@ void action(summaryProvider provider, transactionProvider tprovider) {
   tprovider.updateRecords(0, 0);
 }
 
+String getCategoryFromDesc(String desc) {
+  if (desc.contains("/") && desc.split("/").length > 3) {
+    desc = desc.split("/")[3];
+    List<Finance> Records = dbrepository
+        .getRecords()
+        .where((rec) => rec.desc.contains(desc))
+        .toList();
+    var categories = <String, int>{};
+    Records.forEach((element) {
+      String category = element.trancCategory;
+      categories[category] = (categories[category] ?? 0) + 1;
+    });
+    String maxcategory = "Others";
+    int count = 0;
+    categories.forEach((element, cnt) {
+      if (cnt > count) {
+        maxcategory = element;
+        count = cnt;
+      }
+    });
+
+    return maxcategory;
+  } else {
+    return "Others";
+  }
+}
+
 //////////==========>>>>>>>>>> Message Reading <<<<<<<<<<==========//////////
 
 Future addRecordFromMsg(

@@ -1,5 +1,6 @@
 import 'package:app/data/model/Budget.dart';
 import 'package:app/data/model/Finance.dart';
+import 'package:app/data/model/UserData.dart';
 import 'package:app/view/pages/start-screen.dart';
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
@@ -20,6 +21,7 @@ void main() async {
 
   Hive.registerAdapter(FinanceAdapter());
   Hive.registerAdapter(BudgetAdapter());
+  Hive.registerAdapter(UserdataAdapter());
 
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
@@ -36,6 +38,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late Box financeBox;
   late Box budgetBox;
+  late Box userDataBox;
 
   @override
   void initState() {
@@ -47,10 +50,11 @@ class _MyAppState extends State<MyApp> {
   Future<void> openBoxes() async {
     financeBox = await Hive.openBox('Finance');
     budgetBox = await Hive.openBox('Budget');
+    userDataBox = await Hive.openBox('UserData');
   }
 
   void splashScreen() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     FlutterNativeSplash.remove();
   }
 

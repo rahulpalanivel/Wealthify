@@ -1,11 +1,34 @@
 import 'package:app/data/model/Budget.dart';
 import 'package:app/data/model/Finance.dart';
+import 'package:app/data/model/UserData.dart';
 import 'package:app/domain/repository.dart' as repository;
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
 final financeBox = Hive.box('Finance');
 final budgetbox = Hive.box('Budget');
+final userDataBox = Hive.box('UserData');
+
+bool userExist() {
+  var data = userDataBox.values.elementAtOrNull(0);
+  if (data == null) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+Userdata getUser() {
+  Userdata userdata = userDataBox.values.elementAt(0);
+  return userdata;
+}
+
+void addUser(String userName, String password, int balance, bool deviceAuth,
+    bool notifications, bool defaultTheme) {
+  Userdata userdata = new Userdata(
+      userName, balance, deviceAuth, notifications, password, defaultTheme);
+  userDataBox.add(userdata);
+}
 
 void addRecord(Finance finance) {
   financeBox.put(finance.desc, finance);
@@ -29,7 +52,12 @@ void addRecords(List<List<dynamic>> data, String accountName) {
       trancType = "Income";
     }
 
-    String trancCategory = repository.findCategory(desc);
+    String trancCategory = "";
+    if (repository.findCategory(desc) == "Others") {
+      trancCategory = repository.getCategoryFromDesc(desc);
+    } else {
+      trancCategory = repository.findCategory(desc);
+    }
 
     double amount = 0.0;
     if (data[i][4] != null) {
