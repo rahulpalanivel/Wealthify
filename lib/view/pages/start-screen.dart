@@ -30,14 +30,16 @@ class StartScreen extends StatelessWidget {
               ),
               // Image.asset(
               //   'lib/assets/images/logoName.png',
-              //   width: 250,
+              //   width: 250
               // ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: ElevatedButton(
                   onPressed: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Main()),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            userExists ? const Main() : Main()),
                   ),
                   // onPressed: () {
                   //   print("res:");
