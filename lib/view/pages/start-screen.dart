@@ -1,4 +1,5 @@
 import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/view/pages/Auth.dart';
 import 'package:app/view/pages/mainScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,7 @@ class StartScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            userExists ? const Main() : Main()),
+                            userExists ? const Main() : Auth()),
                   ),
                   // onPressed: () {
                   //   print("res:");

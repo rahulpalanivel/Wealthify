@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:app/data/model/UserData.dart';
+import 'package:app/data/repository/dbRepository.dart' as dbrepository;
 import 'package:app/view/pages/Budget-tab.dart';
 import 'package:app/view/pages/Summary-tab.dart';
 import 'package:app/view/pages/Transactions-tab.dart';
@@ -16,6 +18,7 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
+  Userdata user = dbrepository.getUser();
   int index = 0;
   List Screen = [
     const Home(),
@@ -24,7 +27,7 @@ class _MainState extends State<Main> {
     const BudgetTab()
   ];
   List Titles = [
-    "Welcome Rahul",
+    "Welcome",
     "Transaction Overview",
     "Transaction Records",
     "Budgets"
@@ -41,7 +44,7 @@ class _MainState extends State<Main> {
         surfaceTintColor: const Color.fromARGB(255, 243, 237, 247),
         toolbarHeight: 80,
         title: Text(
-          Titles[index],
+          index == 0 ? "Welcome ${user.userName}" : Titles[index],
           style: const TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.w800,

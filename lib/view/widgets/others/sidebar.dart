@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/view/pages/start-screen.dart';
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
 import 'package:app/view/widgets/dialogBoxs/confirmationBox.dart';
@@ -12,6 +14,12 @@ class Sidebar extends StatelessWidget {
     provider.deleteRecords();
     provider.deleteBudgets();
     tprovider.deleteRecords();
+  }
+
+  void removeUser(BuildContext context) {
+    dbrepository.removeUser();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => StartScreen()));
   }
 
   @override
@@ -62,6 +70,20 @@ class Sidebar extends StatelessWidget {
             title: Text("Change Theme"),
             onTap: () => {},
           ),
+          ListTile(
+              leading: Icon(Icons.person),
+              title: Text("Edit User"),
+              onTap: () async {
+                bool val = await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return confirmBox(
+                          text: "Are you sure you want to remove user ?");
+                    });
+                if (val) {
+                  removeUser(context);
+                }
+              })
         ],
       ),
     );

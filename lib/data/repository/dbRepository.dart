@@ -30,6 +30,10 @@ void addUser(String userName, String password, int balance, bool deviceAuth,
   userDataBox.add(userdata);
 }
 
+void removeUser() {
+  userDataBox.deleteAt(0);
+}
+
 void addRecord(Finance finance) {
   financeBox.put(finance.desc, finance);
 }
