@@ -1,5 +1,6 @@
 import 'package:app/domain/repository.dart' as repository;
 import 'package:app/view/provider/summaryProvider.dart';
+import 'package:app/view/widgets/dialogBoxs/balanceBox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +9,15 @@ class creditCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void modifyBalance() {}
+    //final userProvider = Provider.of<Userdataprovider>(context, listen: true);
+
+    void modifyBalance() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return balanceBox();
+          });
+    }
 
     return Consumer<summaryProvider>(builder: (context, provider, child) {
       provider.defaultValues(0, 0);
@@ -59,8 +68,7 @@ class creditCard extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          repository.formatAmount(
-                              provider.incoming + provider.outgoing),
+                          repository.formatAmount(provider.user.balance),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 23,

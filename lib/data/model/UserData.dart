@@ -9,7 +9,7 @@ class Userdata {
   @HiveField(1)
   final String password;
   @HiveField(2)
-  final int balance;
+  double balance;
   @HiveField(3)
   final bool deviceAuth;
   @HiveField(4)

@@ -1,4 +1,5 @@
 import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/view/pages/mainScreen.dart';
 import 'package:flutter/material.dart';
 
 class Auth extends StatefulWidget {
@@ -19,6 +20,8 @@ class _AuthState extends State<Auth> {
       if (userName.text.isNotEmpty && password.text.isNotEmpty) {
         dbrepository.addUser(
             userName.text, password.text, 0, false, false, true);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Main()));
       }
     }
 

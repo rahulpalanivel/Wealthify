@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
 import 'package:app/data/model/Finance.dart';
+import 'package:app/data/model/UserData.dart';
 import 'package:app/data/repository/dbRepository.dart' as dbrepository;
 import 'package:app/domain/repository.dart' as repository;
 import 'package:app/utils/collections.dart' as collections;
@@ -9,6 +10,8 @@ import 'package:flutter/material.dart';
 import '../../data/model/Budget.dart';
 
 class summaryProvider extends ChangeNotifier {
+  Userdata user = dbrepository.getUser();
+
   double incoming = 0;
   double outgoing = 0;
   double FoodnDrinks = 0;
@@ -102,21 +105,25 @@ class summaryProvider extends ChangeNotifier {
 
   void updateDefault(int month, int year) {
     defaultValues(month, year);
+    updateBalance();
   }
 
   void updateValues(int month, int year) {
     defaultValues(month, year);
+    updateBalance();
     notifyListeners();
   }
 
   void updateRecords() {
     transactionRecords = dbrepository.getRecords();
     yearList = repository.getYearList(dbrepository.getRecords());
+    updateBalance();
     notifyListeners();
   }
 
   void updateBudgets() {
     budgetRecords = dbrepository.getBudgets();
+    updateBalance();
     notifyListeners();
   }
 
@@ -124,6 +131,7 @@ class summaryProvider extends ChangeNotifier {
     dbrepository.deleteAllRecords();
     List<Finance> records = [];
     transactionRecords = records;
+    updateBalance();
     notifyListeners();
   }
 
@@ -133,5 +141,18 @@ class summaryProvider extends ChangeNotifier {
     updateBudgets();
     budgetRecords = [];
     notifyListeners();
+  }
+
+  void updateUser(double amount) {
+    user.balance = amount;
+    dbrepository.updateUser(user);
+    notifyListeners();
+  }
+
+  void updateBalance() {
+    double income = incoming;
+    double expense = outgoing;
+    double bal = user.balance;
+    user.balance = income;
   }
 }

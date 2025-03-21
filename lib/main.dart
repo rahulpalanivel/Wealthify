@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> openBoxes() async {
     financeBox = await Hive.openBox('Finance');
     budgetBox = await Hive.openBox('Budget');
-    userDataBox = await Hive.openBox('UserData');
+    userDataBox = await Hive.openBox('User');
   }
 
   void splashScreen() async {

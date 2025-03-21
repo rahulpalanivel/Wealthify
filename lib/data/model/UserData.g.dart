@@ -18,7 +18,7 @@ class UserdataAdapter extends TypeAdapter<Userdata> {
     };
     return Userdata(
       fields[0] as String,
-      fields[2] as int,
+      fields[2] as double,
       fields[3] as bool,
       fields[4] as bool,
       fields[1] as String,

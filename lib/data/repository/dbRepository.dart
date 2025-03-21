@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 
 final financeBox = Hive.box('Finance');
 final budgetbox = Hive.box('Budget');
-final userDataBox = Hive.box('UserData');
+final userDataBox = Hive.box('User');
 
 bool userExist() {
   var data = userDataBox.values.elementAtOrNull(0);
@@ -23,11 +23,16 @@ Userdata getUser() {
   return userdata;
 }
 
-void addUser(String userName, String password, int balance, bool deviceAuth,
+void addUser(String userName, String password, double balance, bool deviceAuth,
     bool notifications, bool defaultTheme) {
   Userdata userdata = new Userdata(
       userName, balance, deviceAuth, notifications, password, defaultTheme);
   userDataBox.add(userdata);
+}
+
+void updateUser(Userdata user) {
+  removeUser();
+  userDataBox.add(user);
 }
 
 void removeUser() {
