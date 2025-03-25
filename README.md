@@ -1,7 +1,7 @@
 <p align="center">
   <img width="140" src="lib\assets\icon\appLogo.png" />  
   <h1 align="center">Wealthify</h1>
-  <h3 align="center">A User friendly financial management app for expense tracking and budgeting built with automated transaction recording features.</h3>
+  <h3 align="center">An User friendly financial management app for expense tracking and budgeting built with automated transaction recording features.</h3>
 </p>
 
 
