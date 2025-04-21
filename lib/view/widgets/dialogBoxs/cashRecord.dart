@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, prefer_const_constructors
 
 import 'package:app/data/model/Finance.dart';
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/data/repository/dbRepository.dart';
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
@@ -40,7 +40,7 @@ class _CashRecordState extends State<CashRecord> {
       amount = amount * -1;
     }
     var finance = Finance(" ", " ", date, desc, tranc, category, amount);
-    dbrepository.addRecord(finance);
+    DbRepository.addRecord(finance);
   }
 
   void action(summaryProvider provider, transactionProvider tprovider,
@@ -287,7 +287,7 @@ class _CashRecordState extends State<CashRecord> {
                                   );
                                 });
                             if (val) {
-                              dbrepository.deleteRecord(data.desc);
+                              DbRepository.deleteRecord(data.desc);
                               Navigator.pop(context);
                               action(provider, tprovider, selectedTotal,
                                   selectedMonth, selectedYear);

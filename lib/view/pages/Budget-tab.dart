@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, unnecessary_null_comparison, prefer_const_constructors, body_might_complete_normally_nullable
 
-import 'package:app/domain/repository.dart' as repository;
+import 'package:app/domain/repository.dart';
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -23,7 +23,7 @@ class BudgetTab extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       if (provider.budgetRecords.isNotEmpty) {
                         final rowData = provider.budgetRecords[index];
-                        double budgetamt = (repository.getamtforBudget(
+                        double budgetamt = (Repository.getamtforBudget(
                             rowData.date,
                             rowData.trancCategory,
                             rowData.duration));
@@ -40,7 +40,7 @@ class BudgetTab extends StatelessWidget {
                                       Padding(
                                         padding: const EdgeInsets.fromLTRB(
                                             0, 8, 0, 8),
-                                        child: Icon(repository.iconForCategory(
+                                        child: Icon(Repository.iconForCategory(
                                             rowData.trancCategory)),
                                       ),
                                       Text(rowData.trancCategory),
@@ -48,18 +48,17 @@ class BudgetTab extends StatelessWidget {
                                   ),
                                   title: Text(rowData.duration),
                                   subtitle: Text(rowData.duration == "Monthly"
-                                      ? repository.formatDate(rowData.date)[1] +
+                                      ? Repository.formatDate(rowData.date)[1] +
                                           " " +
-                                          repository.formatDate(rowData.date)[2]
-                                      : repository.formatDate(rowData.date)[2]),
+                                          Repository.formatDate(rowData.date)[2]
+                                      : Repository.formatDate(rowData.date)[2]),
                                   trailing: Column(
                                     children: [
                                       Text(
-                                        repository
-                                                .formatAmount(budgetamt)
+                                        Repository.formatAmount(budgetamt)
                                                 .toString() +
                                             "/" +
-                                            repository.formatAmount(
+                                            Repository.formatAmount(
                                                 rowData.Budget_amount),
                                         style: TextStyle(fontSize: 15),
                                       ),

@@ -1,8 +1,8 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
 import 'package:app/data/model/Finance.dart';
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
-import 'package:app/domain/repository.dart' as repository;
+import 'package:app/data/repository/dbRepository.dart';
+import 'package:app/domain/repository.dart';
 import 'package:app/utils/collections.dart' as collections;
 import 'package:flutter/material.dart';
 
@@ -26,9 +26,9 @@ class summaryProvider extends ChangeNotifier {
 
   List<String> months = collections.months;
 
-  List<Finance> transactionRecords = dbrepository.getRecords();
-  List<Budget> budgetRecords = dbrepository.getBudgets();
-  List<String> yearList = repository.getYearList(dbrepository.getRecords());
+  List<Finance> transactionRecords = DbRepository.getRecords();
+  List<Budget> budgetRecords = DbRepository.getBudgets();
+  List<String> yearList = Repository.getYearList(DbRepository.getRecords());
 
   Map<int, List<double>> dataByDate = {};
   Map<int, List<double>> dataByMonth = {};
@@ -39,47 +39,45 @@ class summaryProvider extends ChangeNotifier {
     List<double> values = [];
 
     if (month == 0 && year == 0) {
-      records = dbrepository.getRecords();
-      values = repository.getAmount(records);
+      records = DbRepository.getRecords();
+      values = Repository.getAmount(records);
     } else if (month != 0) {
-      records = dbrepository
-          .getRecords()
+      records = DbRepository.getRecords()
           .where((element) =>
-              repository.formatDate(element.date)[1].substring(0, 3) ==
+              Repository.formatDate(element.date)[1].substring(0, 3) ==
                   months[month] &&
-              repository.formatDate(element.date)[2] == year.toString())
+              Repository.formatDate(element.date)[2] == year.toString())
           .toList();
 
-      values = repository.getAmount(records);
+      values = Repository.getAmount(records);
     } else {
-      records = dbrepository
-          .getRecords()
+      records = DbRepository.getRecords()
           .where((element) =>
-              repository.formatDate(element.date)[2] == year.toString())
+              Repository.formatDate(element.date)[2] == year.toString())
           .toList();
 
-      values = repository.getAmount(records);
+      values = Repository.getAmount(records);
     }
 
     incoming = values[0];
     outgoing = values[1];
 
-    FoodnDrinks = repository.getAmountByCategory(records, "Food & Drinks");
-    Shopping = repository.getAmountByCategory(records, "Shopping");
-    Groceries = repository.getAmountByCategory(records, "Groceries");
-    Medical = repository.getAmountByCategory(records, "Medical");
-    Bills = repository.getAmountByCategory(records, "Bills");
-    Travel = repository.getAmountByCategory(records, "Travel");
-    Transfer = repository.getAmountByCategory(records, "Transfer");
-    CreditCard = repository.getAmountByCategory(records, "Credit Card");
-    Education = repository.getAmountByCategory(records, "Education");
-    Home = repository.getAmountByCategory(records, "Home");
-    Salary = repository.getAmountByCategory(records, "Salary");
-    Others = repository.getAmountByCategory(records, "Others");
+    FoodnDrinks = Repository.getAmountByCategory(records, "Food & Drinks");
+    Shopping = Repository.getAmountByCategory(records, "Shopping");
+    Groceries = Repository.getAmountByCategory(records, "Groceries");
+    Medical = Repository.getAmountByCategory(records, "Medical");
+    Bills = Repository.getAmountByCategory(records, "Bills");
+    Travel = Repository.getAmountByCategory(records, "Travel");
+    Transfer = Repository.getAmountByCategory(records, "Transfer");
+    CreditCard = Repository.getAmountByCategory(records, "Credit Card");
+    Education = Repository.getAmountByCategory(records, "Education");
+    Home = Repository.getAmountByCategory(records, "Home");
+    Salary = Repository.getAmountByCategory(records, "Salary");
+    Others = Repository.getAmountByCategory(records, "Others");
 
     transactionRecords = records;
 
-    yearList = repository.getYearList(dbrepository.getRecords());
+    yearList = Repository.getYearList(DbRepository.getRecords());
 
     dataByCategory = [
       Others,
@@ -96,8 +94,8 @@ class summaryProvider extends ChangeNotifier {
       Salary,
     ];
 
-    dataByDate = repository.getAmountByDate(records);
-    dataByMonth = repository.getAmountByMonth(records);
+    dataByDate = Repository.getAmountByDate(records);
+    dataByMonth = Repository.getAmountByMonth(records);
   }
 
   void updateDefault(int month, int year) {
@@ -110,25 +108,25 @@ class summaryProvider extends ChangeNotifier {
   }
 
   void updateRecords() {
-    transactionRecords = dbrepository.getRecords();
-    yearList = repository.getYearList(dbrepository.getRecords());
+    transactionRecords = DbRepository.getRecords();
+    yearList = Repository.getYearList(DbRepository.getRecords());
     notifyListeners();
   }
 
   void updateBudgets() {
-    budgetRecords = dbrepository.getBudgets();
+    budgetRecords = DbRepository.getBudgets();
     notifyListeners();
   }
 
   void deleteRecords() {
-    dbrepository.deleteAllRecords();
+    DbRepository.deleteAllRecords();
     List<Finance> records = [];
     transactionRecords = records;
     notifyListeners();
   }
 
   void deleteBudgets() {
-    dbrepository.deleteAllBudgets();
+    DbRepository.deleteAllBudgets();
     budgetRecords = [];
     updateBudgets();
     budgetRecords = [];

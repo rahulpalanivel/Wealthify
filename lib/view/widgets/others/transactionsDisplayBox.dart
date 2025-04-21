@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, must_be_immutable, prefer_if_null_operators
 
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/data/repository/dbRepository.dart';
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +85,7 @@ class TransactionData extends StatelessWidget {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      dbrepository.addRecords(data, account);
+                      DbRepository.addRecords(data, account);
                       provider.updateValues(0, 0);
                       provider.updateRecords();
                       if (selectedTotal) {

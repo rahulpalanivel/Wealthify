@@ -1,4 +1,4 @@
-import 'package:app/domain/repository.dart' as repository;
+import 'package:app/domain/repository.dart';
 import 'package:app/utils/screensize.dart' as screen;
 import 'package:flutter/material.dart';
 
@@ -28,7 +28,7 @@ class TransactionBox extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
-              child: Text(repository.formatAmount(value),
+              child: Text(Repository.formatAmount(value),
                   style: const TextStyle(color: Colors.white)),
             ),
           ),

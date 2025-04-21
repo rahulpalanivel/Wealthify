@@ -1,5 +1,5 @@
 import 'package:app/data/model/Finance.dart';
-import 'package:app/domain/repository.dart' as repository;
+import 'package:app/domain/repository.dart';
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
 import 'package:app/view/widgets/dialogBoxs/bankStatementRecord.dart';
@@ -120,7 +120,7 @@ class Addbox extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: () async {
                     await {
-                      repository.addRecordFromMsg(provider, tprovider),
+                      Repository.addRecordFromMsg(provider, tprovider),
                     };
                   },
                   style: ButtonStyle(

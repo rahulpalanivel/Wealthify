@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, prefer_const_constructors, use_build_context_synchronously, sized_box_for_whitespace
 
-import 'package:app/domain/repository.dart' as repository;
+import 'package:app/domain/repository.dart';
 import 'package:app/view/widgets/buttons/DropDownBox.dart';
 import 'package:app/view/widgets/others/transactionsDisplayBox.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +27,9 @@ class _BankStatementState extends State<BankStatement> {
 
   List<List<dynamic>> Data = [];
   void pickAndDisplayData() async {
-    final filePath = await repository.pickXLSXFile();
+    final filePath = await Repository.pickXLSXFile();
     if (filePath != null) {
-      Data = repository.parseXLSXFile(filePath);
+      Data = Repository.parseXLSXFile(filePath);
 
       Navigator.push(
         context,

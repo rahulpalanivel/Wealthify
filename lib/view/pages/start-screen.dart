@@ -1,4 +1,4 @@
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/data/repository/dbRepository.dart';
 import 'package:app/view/pages/mainScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +7,7 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool userExists = dbrepository.userExist();
+    bool userExists = DbRepository.userExist();
     return Scaffold(
       body: Container(
         color: const Color.fromARGB(255, 149, 229, 241),

@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, use_build_context_synchronously, prefer_interpolation_to_compose_strings, unnecessary_null_comparison, dead_code, body_might_complete_normally_nullable, prefer_const_constructors, sized_box_for_whitespace
 
-import 'package:app/domain/repository.dart' as repository;
+import 'package:app/domain/repository.dart';
 import 'package:app/utils/collections.dart' as collections;
 //import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/provider/transactionProvider.dart';
@@ -153,7 +153,7 @@ class TransactionTab extends StatelessWidget {
                   if (provider.transactionRecords.isNotEmpty) {
                     final rowData = provider.transactionRecords[index];
                     List<String> datemonthyear =
-                        repository.formatDate(rowData.date);
+                        Repository.formatDate(rowData.date);
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(10, 1, 10, 1),
                       child: Card(
@@ -212,13 +212,13 @@ class TransactionTab extends StatelessWidget {
                                     trailing: Column(
                                       children: [
                                         Icon(
-                                          repository.iconForCategory(
+                                          Repository.iconForCategory(
                                               rowData.trancCategory),
                                           size: 30,
                                         ),
                                         Text(
-                                            (repository
-                                                .formatAmount(rowData.amount)),
+                                            (Repository.formatAmount(
+                                                rowData.amount)),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 15,

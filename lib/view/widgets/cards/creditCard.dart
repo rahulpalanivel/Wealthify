@@ -1,4 +1,4 @@
-import 'package:app/domain/repository.dart' as repository;
+import 'package:app/domain/repository.dart';
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +59,7 @@ class creditCard extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          repository.formatAmount(
+                          Repository.formatAmount(
                               provider.incoming + provider.outgoing),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
@@ -117,7 +117,7 @@ class creditCard extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          repository.formatAmount(provider.incoming),
+                          Repository.formatAmount(provider.incoming),
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 17,
@@ -157,7 +157,7 @@ class creditCard extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          repository.formatAmount(provider.outgoing),
+                          Repository.formatAmount(provider.outgoing),
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 17,

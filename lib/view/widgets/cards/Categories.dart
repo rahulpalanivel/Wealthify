@@ -1,4 +1,4 @@
-import 'package:app/domain/repository.dart' as repository;
+import 'package:app/domain/repository.dart';
 import 'package:flutter/material.dart';
 
 class Category extends StatelessWidget {
@@ -18,7 +18,7 @@ class Category extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Icon(repository.iconForCategory(category), size: 35),
+            Icon(Repository.iconForCategory(category), size: 35),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
@@ -30,7 +30,7 @@ class Category extends StatelessWidget {
                         fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    repository.formatAmount(value),
+                    Repository.formatAmount(value),
                     style: const TextStyle(fontSize: 17, color: Colors.grey),
                   ),
                 ],

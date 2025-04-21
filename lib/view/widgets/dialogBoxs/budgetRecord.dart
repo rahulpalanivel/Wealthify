@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace
 
-import 'package:app/data/repository/dbRepository.dart' as dbrepository;
+import 'package:app/data/repository/dbRepository.dart';
 import 'package:app/utils/collections.dart' as collections;
 import 'package:app/view/provider/summaryProvider.dart';
 import 'package:app/view/widgets/buttons/DropDownBox.dart';
@@ -111,7 +111,7 @@ class _BudgetDialogState extends State<BudgetDialog> {
                         return alertBox();
                       })
                   : {
-                      dbrepository.newBudget(SelectedItem, SelectedDuration,
+                      DbRepository.newBudget(SelectedItem, SelectedDuration,
                           double.parse(amountcontroller.text)),
                       provider.updateBudgets(),
                       Navigator.pop(context)
